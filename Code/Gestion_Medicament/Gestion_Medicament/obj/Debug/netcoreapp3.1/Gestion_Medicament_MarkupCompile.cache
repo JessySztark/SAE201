@@ -1,5 +1,5 @@
 ﻿Gestion_Medicament
-1.0.0.0
+
 
 winexe
 C#
@@ -12,7 +12,7 @@ TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1;
 P:\SAE201\SAE201\Code\Gestion_Medicament\Gestion_Medicament\App.xaml
 11407045341
 
-13-1410418048
+11-903703434
 193-161386432
 MainWindow.xaml;
 

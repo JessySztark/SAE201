@@ -1,16 +1,101 @@
 using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
 
-public class Maladie {
-	public string NomMaladie { get; set; }
-	public int IdMaladie { get; set; }
+public class Maladie : CRUD<Maladie>{
+    private String nomMaladie;
+    private int idMaladie;
 
-	public Maladie(object nomMaladie) {
-		throw new System.NotImplementedException("Not implemented");
-	}
-	public Maladie(object idMaladie, object nomMaladie) {
-		throw new System.NotImplementedException("Not implemented");
-	}
+    public Maladie()
+    {
+        
+    }
 
-	private Est_autorisé[] est_autorisés;
+    private Est_autorisé[] est_autorisés;
 
+    public string NomMaladie
+    {
+        get
+        {
+            return this.nomMaladie;
+        }
+
+        set
+        {
+            this.nomMaladie = value;
+        }
+    }
+
+    public int IdMaladie
+    {
+        get
+        {
+            return this.idMaladie;
+        }
+
+        set
+        {
+            this.idMaladie = value;
+        }
+    }
+
+    public void Create()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Read()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Update()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Delete()
+    {
+        throw new NotImplementedException();
+    }
+
+    public List<Maladie> FindAll()
+    {
+        List<Maladie> listeMaladies = new List<Maladie>();
+        DataAccess access = new DataAccess();
+        SqlDataReader reader;
+        try
+        {
+            if (access.openConnection())
+            {
+                reader = access.getData("select * from [BT3].[IUT-ACY\\dbo].[MALADIE]");
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Maladie uneMaladie = new Maladie();
+                        uneMaladie.IdMaladie = (int)reader.GetInt64(0);
+                        uneMaladie.NomMaladie = reader.GetString(1);
+                        listeMaladies.Add(uneMaladie);
+                    }
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("No rows found.", "Important Message");
+                }
+                reader.Close();
+                access.closeConnection();
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Windows.MessageBox.Show(ex.Message, "Important Message");
+        }
+        return listeMaladies;
+    }
+
+    public List<Maladie> FindBySelection(ref string criteres)
+    {
+        throw new NotImplementedException();
+    }
 }

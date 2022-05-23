@@ -1,17 +1,12 @@
 using System;
+using System.Collections.Generic;
 
-public class CRUD {
-	public void Create() {
-		throw new System.NotImplementedException("Not implemented");
-	}
-	public void Read() {
-		throw new System.NotImplementedException("Not implemented");
-	}
-	public void Update() {
-		throw new System.NotImplementedException("Not implemented");
-	}
-	public void Delete() {
-		throw new System.NotImplementedException("Not implemented");
-	}
-
+public interface CRUD<T>
+{
+    void Create();
+    void Read();
+    void Update();
+    void Delete();
+    List<T> FindAll();
+	List<T> FindBySelection(ref String criteres);
 }

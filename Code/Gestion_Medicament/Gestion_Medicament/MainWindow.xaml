@@ -9,5 +9,10 @@
     Width="800"
     Height="450"
     mc:Ignorable="d">
-    <Grid />
+    <Grid>
+        <ListView
+            x:Name="lvMaladie"
+            Margin="43,29,481,77"
+            ItemsSource="{Binding listeMaladies}" />
+    </Grid>
 </Window>

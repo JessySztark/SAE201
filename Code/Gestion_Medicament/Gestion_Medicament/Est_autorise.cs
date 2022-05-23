@@ -1,21 +1,128 @@
 using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
 
-public class Est_autorisé : CRUD  {
-	public string Commentaire { get; set; }
-	public Date UneDate { get; set; }
-	public Maladie UneMaladie { get; set; }
-	public Medicament UnMedicament { get; set; }
+public class Est_autorisé : CRUD<Est_autorisé>
+{
+    private String commentaire;
+    private DateTime uneDate;
+    private Maladie uneMaladie;
+    private Medicament unMedicament;
 
-	public Est_autorisé(object unMedicament, object uneMaladie, object uneDate, object commentaire) {
-		throw new System.NotImplementedException("Not implemented");
-	}
-	public Est_autorisé(object unMedicament, object uneMaladie, object uneDate) {
-		throw new System.NotImplementedException("Not implemented");
-	}
+    public Est_autorisé()
+    {
 
-	private Medicament medicament;
+    }
+    public string Commentaire
+    {
+        get
+        {
+            return this.commentaire;
+        }
 
-	private Maladie maladie;
-	private Date_autorisation date_autorisation;
+        set
+        {
+            this.commentaire = value;
+        }
+    }
 
+    public DateTime UneDate
+    {
+        get
+        {
+            return this.uneDate;
+        }
+
+        set
+        {
+            this.uneDate = value;
+        }
+    }
+
+    public Maladie UneMaladie
+    {
+        get
+        {
+            return this.uneMaladie;
+        }
+
+        set
+        {
+            this.uneMaladie = value;
+        }
+    }
+
+    public Medicament UnMedicament
+    {
+        get
+        {
+            return this.unMedicament;
+        }
+
+        set
+        {
+            this.unMedicament = value;
+        }
+    }
+
+    public void Create()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Read()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Update()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Delete()
+    {
+        throw new NotImplementedException();
+    }
+
+    public List<Est_autorisé> FindAll()
+    {
+        List<Est_autorisé> listeAutorisations = new List<Est_autorisé>();
+        DataAccess access = new DataAccess();
+        SqlDataReader reader;
+        try
+        {
+            if (access.openConnection())
+            {
+                reader = access.getData("select * from [BT3].[IUT-ACY\\dbo].[EST_AUTORISE]");
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Est_autorisé uneAutorisation = new Est_autorisé();
+                        uneAutorisation.UnMedicament.Idmedicament = (int)reader.GetInt64(0);
+                        uneAutorisation.UneMaladie.IdMaladie = (int)reader.GetInt64(1);
+                        uneAutorisation.UneDate = reader.GetDateTime(2);
+                        listeAutorisations.Add(uneAutorisation);
+                    }
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("No rows found.", "Important Message");
+                }
+                reader.Close();
+                access.closeConnection();
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Windows.MessageBox.Show(ex.Message, "Important Message");
+        }
+        return listeAutorisations;
+    }
+
+    public List<Est_autorisé> FindBySelection(ref string criteres)
+    {
+        throw new NotImplementedException();
+    }
 }

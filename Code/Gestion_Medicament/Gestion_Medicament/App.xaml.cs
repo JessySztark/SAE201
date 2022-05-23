@@ -13,5 +13,9 @@ namespace Gestion_Medicament
     /// </summary>
     public partial class App : Application
     {
+        void lancementApplication(object sender, StartupEventArgs args)
+        {
+            ApplicationData.loadApplicationData();
+        }
     }
 }
