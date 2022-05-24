@@ -13,6 +13,19 @@
         <ListView
             x:Name="lvMaladie"
             Margin="43,29,481,77"
-            ItemsSource="{Binding listeMaladies}" />
+            ItemsSource="{Binding listeMaladies, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn
+                        Width="90"
+                        DisplayMemberBinding="{Binding IdMaladie}"
+                        Header="ID maladie" />
+                    <GridViewColumn
+                        Width="90"
+                        DisplayMemberBinding="{Binding NomMaladie}"
+                        Header="Nom maladie" />
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>

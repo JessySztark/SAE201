@@ -24,3 +24,4 @@ P:\SAE201\SAE201\Code\Gestion_Medicament\Gestion_Medicament\obj\Debug\netcoreapp
 P:\SAE201\SAE201\Code\Gestion_Medicament\Gestion_Medicament\obj\Debug\netcoreapp3.1\Gestion_Medicament.dll
 P:\SAE201\SAE201\Code\Gestion_Medicament\Gestion_Medicament\obj\Debug\netcoreapp3.1\Gestion_Medicament.pdb
 P:\SAE201\SAE201\Code\Gestion_Medicament\Gestion_Medicament\obj\Debug\netcoreapp3.1\Gestion_Medicament.genruntimeconfig.cache
+P:\SAE201\SAE201\Code\Gestion_Medicament\Gestion_Medicament\obj\Debug\netcoreapp3.1\GeneratedInternalTypeHelper.g.cs
