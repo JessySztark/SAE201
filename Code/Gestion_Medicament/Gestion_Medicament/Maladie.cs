@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 public class Maladie : CRUD<Maladie>{
     private String nomMaladie;
     private int idMaladie;
+    List<Maladie> listeMaladies;
 
     public Maladie()
     {
@@ -39,6 +40,19 @@ public class Maladie : CRUD<Maladie>{
         }
     }
 
+    public List<Maladie> ListeMaladies
+    {
+        get
+        {
+            return this.listeMaladies;
+        }
+
+        set
+        {
+            this.listeMaladies = value;
+        }
+    }
+
     public void Create()
     {
         throw new NotImplementedException();
@@ -61,14 +75,14 @@ public class Maladie : CRUD<Maladie>{
 
     public List<Maladie> FindAll()
     {
-        List<Maladie> listeMaladies = new List<Maladie>();
+         ListeMaladies= new List<Maladie>();
         DataAccess access = new DataAccess();
         SqlDataReader reader;
         try
         {
             if (access.openConnection())
             {
-                reader = access.getData("select * from [BT3].[IUT-ACY\\dbo].[MALADIE]");
+                reader = access.getData("select * from MALADIE");//[BT3].[IUT-ACY\\dbo].[MALADIE]
                 if (reader.HasRows)
                 {
                     while (reader.Read())
@@ -76,7 +90,7 @@ public class Maladie : CRUD<Maladie>{
                         Maladie uneMaladie = new Maladie();
                         uneMaladie.IdMaladie = (int)reader.GetInt64(0);
                         uneMaladie.NomMaladie = reader.GetString(1);
-                        listeMaladies.Add(uneMaladie);
+                        ListeMaladies.Add(uneMaladie);
                     }
                 }
                 else
@@ -91,7 +105,7 @@ public class Maladie : CRUD<Maladie>{
         {
             System.Windows.MessageBox.Show(ex.Message, "Important Message");
         }
-        return listeMaladies;
+        return ListeMaladies;
     }
 
     public List<Maladie> FindBySelection(ref string criteres)

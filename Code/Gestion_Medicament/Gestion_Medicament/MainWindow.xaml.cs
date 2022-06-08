@@ -23,6 +23,8 @@ namespace Gestion_Medicament
         public MainWindow()
         {
             InitializeComponent();
+            ApplicationData.loadApplicationData();
+            lvMaladie.ItemsSource = ApplicationData.listeMaladies;
         }
     }
 }

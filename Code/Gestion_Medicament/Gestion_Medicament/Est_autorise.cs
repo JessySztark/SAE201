@@ -94,7 +94,7 @@ public class Est_autorisé : CRUD<Est_autorisé>
         {
             if (access.openConnection())
             {
-                reader = access.getData("select * from [BT3].[IUT-ACY\\dbo].[EST_AUTORISE]");
+                reader = access.getData("select * from EST_AUTORISE");//[BT3].[IUT-ACY\\dbo].[EST_AUTORISE]
                 if (reader.HasRows)
                 {
                     while (reader.Read())
