@@ -94,14 +94,14 @@ public class Est_autorisé : CRUD<Est_autorisé>
         {
             if (access.openConnection())
             {
-                reader = access.getData("select * from [EST_AUTORISE]");
+                reader = access.getData("select * from [EST_AUTORISE]"); // [BT3].[IUT-ACY\\sztarkj].
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
                         Est_autorisé uneAutorisation = new Est_autorisé();
-                        uneAutorisation.UnMedicament.Idmedicament = (int)reader.GetInt64(0);
-                        uneAutorisation.UneMaladie.IdMaladie = (int)reader.GetInt64(1);
+                        uneAutorisation.UnMedicament.Idmedicament = (int)reader.GetDecimal(0);
+                        uneAutorisation.UneMaladie.IdMaladie = (int)reader.GetDecimal(1);
                         uneAutorisation.UneDate = reader.GetDateTime(2);
                         listeAutorisations.Add(uneAutorisation);
                     }

@@ -83,14 +83,14 @@ public class Medicament : CRUD<Medicament>{
         {
             if (access.openConnection())
             {
-                reader = access.getData("select * from [MEDICAMENT]");
+                reader = access.getData("select * from [MEDICAMENT]"); // [BT3].[IUT-ACY\\sztarkj].
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
                         Medicament unMedicament = new Medicament();
-                        unMedicament.Idmedicament = (int)reader.GetInt64(0);
-                        unMedicament.UneCategorie.IdCategorie = (int)reader.GetInt64(1);
+                        unMedicament.Idmedicament = (int)reader.GetDecimal(0);
+                        unMedicament.UneCategorie.IdCategorie = (int)reader.GetDecimal(1);
                         unMedicament.NomMedicament = reader.GetString(2);
                         listeMedicaments.Add(unMedicament);
                     }

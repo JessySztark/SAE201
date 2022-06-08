@@ -64,13 +64,13 @@ public class CategorieMedicament : CRUD<CategorieMedicament>{
         {
             if (access.openConnection())
             {
-                reader = access.getData("select * from [CATEGORIEMEDICAMENT]");
+                reader = access.getData("select * from [CATEGORIEMEDICAMENT]"); // [BT3].[IUT-ACY\\sztarkj].
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
                         CategorieMedicament uneCategorie = new CategorieMedicament();
-                        uneCategorie.IdCategorie = (int)reader.GetInt64(0);
+                        uneCategorie.IdCategorie = (int)reader.GetDecimal(0);
                         uneCategorie.NomCategorie = reader.GetString(1);
                         listeCategories.Add(uneCategorie);
                     }
