@@ -83,7 +83,7 @@ public class Medicament : CRUD<Medicament>{
         {
             if (access.openConnection())
             {
-                reader = access.getData("select * from [BT3].[IUT-ACY\\sztarkj].[MEDICAMENT]");
+                reader = access.getData("select * from [MEDICAMENT]");
                 if (reader.HasRows)
                 {
                     while (reader.Read())
