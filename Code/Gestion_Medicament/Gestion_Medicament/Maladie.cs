@@ -68,7 +68,7 @@ public class Maladie : CRUD<Maladie>{
         {
             if (access.openConnection())
             {
-                reader = access.getData("select * from [MALADIE]"); //[BT3].[IUT-ACY\\sztarkj].
+                reader = access.getData("select * from [MALADIE]");
                 if (reader.HasRows)
                 {
                     while (reader.Read())

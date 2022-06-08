@@ -73,5 +73,42 @@
         </ListView>
 
 
+
+        <ListView
+            x:Name="lvDate"
+            Margin="365,201,115,105"
+            ItemsSource="{Binding listeDates, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn
+                        Width="300"
+                        DisplayMemberBinding="{Binding Date}"
+                        Header="Date" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView
+            x:Name="lvAutorisation"
+            Margin="43,355,115,10"
+            ItemsSource="{Binding listeAutorisations, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn
+                        Width="200"
+                        DisplayMemberBinding="{Binding Idmedicament}"
+                        Header="ID Médicament" />
+                    <GridViewColumn
+                        Width="200"
+                        DisplayMemberBinding="{Binding IdMaladie}"
+                        Header="ID Maladie" />
+                    <GridViewColumn
+                        Width="200"
+                        DisplayMemberBinding="{Binding Date}"
+                        Header="Date" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+
     </Grid>
 </Window>

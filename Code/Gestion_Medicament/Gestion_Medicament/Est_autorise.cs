@@ -8,6 +8,8 @@ public class Est_autorisé : CRUD<Est_autorisé>
     private DateTime uneDate;
     private Maladie uneMaladie;
     private Medicament unMedicament;
+    private int idMedicament;
+    private int idMaladie;
 
     public Est_autorisé()
     {
@@ -66,6 +68,32 @@ public class Est_autorisé : CRUD<Est_autorisé>
         }
     }
 
+    public int IdMedicament
+    {
+        get
+        {
+            return this.idMedicament;
+        }
+
+        set
+        {
+            this.idMedicament = value;
+        }
+    }
+
+    public int IdMaladie
+    {
+        get
+        {
+            return this.idMaladie;
+        }
+
+        set
+        {
+            this.idMaladie = value;
+        }
+    }
+
     public void Create()
     {
         throw new NotImplementedException();
@@ -95,14 +123,14 @@ public class Est_autorisé : CRUD<Est_autorisé>
         {
             if (access.openConnection())
             {
-                reader = access.getData("select * from [EST_AUTORISE]"); // [BT3].[IUT-ACY\\sztarkj].
+                reader = access.getData("select * from [EST_AUTORISE]");
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
                         Est_autorisé uneAutorisation = new Est_autorisé();
-                        uneAutorisation.UnMedicament.Idmedicament = (int)reader.GetDecimal(0);
-                        uneAutorisation.UneMaladie.IdMaladie = (int)reader.GetDecimal(1);
+                        uneAutorisation.IdMedicament = (int)reader.GetDecimal(0);
+                        uneAutorisation.IdMaladie = (int)reader.GetDecimal(1);
                         uneAutorisation.UneDate = reader.GetDateTime(2);
                         listeAutorisations.Add(uneAutorisation);
                     }

@@ -6,6 +6,7 @@ public class Medicament : CRUD<Medicament>{
     private int idmedicament;
     private CategorieMedicament uneCategorie;
     private String nomMedicament;
+    private int idCategorie;
 
     public Medicament()
     {
@@ -54,6 +55,19 @@ public class Medicament : CRUD<Medicament>{
         }
     }
 
+    public int IdCategorie
+    {
+        get
+        {
+            return this.idCategorie;
+        }
+
+        set
+        {
+            this.idCategorie = value;
+        }
+    }
+
     public void Create()
     {
         throw new NotImplementedException();
@@ -83,14 +97,14 @@ public class Medicament : CRUD<Medicament>{
         {
             if (access.openConnection())
             {
-                reader = access.getData("select * from [MEDICAMENT]"); // [BT3].[IUT-ACY\\sztarkj].
+                reader = access.getData("select * from [MEDICAMENT]");
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
                         Medicament unMedicament = new Medicament();
                         unMedicament.Idmedicament = (int)reader.GetDecimal(0);
-                        unMedicament.UneCategorie.IdCategorie = (int)reader.GetDecimal(1);
+                        unMedicament.IdCategorie = (int)reader.GetDecimal(1);
                         unMedicament.NomMedicament = reader.GetString(2);
                         listeMedicaments.Add(unMedicament);
                     }

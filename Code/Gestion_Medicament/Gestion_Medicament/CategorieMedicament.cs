@@ -64,7 +64,7 @@ public class CategorieMedicament : CRUD<CategorieMedicament>{
         {
             if (access.openConnection())
             {
-                reader = access.getData("select * from [CATEGORIEMEDICAMENT]"); // [BT3].[IUT-ACY\\sztarkj].
+                reader = access.getData("select * from [CATEGORIEMEDICAMENT]");
                 if (reader.HasRows)
                 {
                     while (reader.Read())
