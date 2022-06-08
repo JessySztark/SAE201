@@ -27,16 +27,16 @@ namespace Gestion_Medicament {
                 set;
             }
         public static void loadApplicationData() {
-                //chargement des tables
+            //chargement des tables
+                CategorieMedicament uneCategorie = new CategorieMedicament();
                 Maladie uneMaladie = new Maladie();
                 Medicament unMedicament = new Medicament();
-                CategorieMedicament uneCategorie = new CategorieMedicament();
                 Date_autorisation uneDate = new Date_autorisation();
                 Est_autorisé uneAutorisation = new Est_autorisé();
-                listeMaladies = uneMaladie.FindAll();
-                listeMedicaments = unMedicament.FindAll();
                 listeCategories = uneCategorie.FindAll();
+                listeMaladies = uneMaladie.FindAll();
                 listeDates = uneDate.FindAll();
+                listeMedicaments = unMedicament.FindAll();
                 listeAutorisations = uneAutorisation.FindAll();
             }
         }

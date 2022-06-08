@@ -13,6 +13,7 @@ public class Est_autorisé : CRUD<Est_autorisé>
     {
 
     }
+
     public string Commentaire
     {
         get
