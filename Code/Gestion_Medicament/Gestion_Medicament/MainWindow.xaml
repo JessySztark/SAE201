@@ -94,17 +94,25 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn
-                        Width="200"
-                        DisplayMemberBinding="{Binding Idmedicament}"
+                        Width="100"
+                        DisplayMemberBinding="{Binding IdMedicament}"
                         Header="ID Médicament" />
                     <GridViewColumn
-                        Width="200"
+                        Width="150"
+                        DisplayMemberBinding="{Binding NomMedicament}"
+                        Header="Nom Médicament" />
+                    <GridViewColumn
+                        Width="100"
                         DisplayMemberBinding="{Binding IdMaladie}"
                         Header="ID Maladie" />
                     <GridViewColumn
-                        Width="200"
-                        DisplayMemberBinding="{Binding Date}"
-                        Header="Date" />
+                        Width="150"
+                        DisplayMemberBinding="{Binding NomMaladie}"
+                        Header="Nom Maladie" />
+                    <GridViewColumn
+                        Width="130"
+                        DisplayMemberBinding="{Binding UneDate}"
+                        Header="Date autorisation" />
                 </GridView>
             </ListView.View>
         </ListView>
