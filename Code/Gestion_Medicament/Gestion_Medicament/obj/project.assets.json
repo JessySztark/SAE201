@@ -454,23 +454,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\sztarkj\\.nuget\\packages\\": {},
+    "C:\\Users\\cacardt\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "P:\\SAE201\\SAE201\\Code\\Gestion_Medicament\\Gestion_Medicament\\Gestion_Medicament.csproj",
+      "projectUniqueName": "P:\\SAÉ\\SAE201\\github\\SAE201\\Code\\Gestion_Medicament\\Gestion_Medicament\\Gestion_Medicament.csproj",
       "projectName": "Gestion_Medicament",
-      "projectPath": "P:\\SAE201\\SAE201\\Code\\Gestion_Medicament\\Gestion_Medicament\\Gestion_Medicament.csproj",
-      "packagesPath": "C:\\Users\\sztarkj\\.nuget\\packages\\",
-      "outputPath": "P:\\SAE201\\SAE201\\Code\\Gestion_Medicament\\Gestion_Medicament\\obj\\",
+      "projectPath": "P:\\SAÉ\\SAE201\\github\\SAE201\\Code\\Gestion_Medicament\\Gestion_Medicament\\Gestion_Medicament.csproj",
+      "packagesPath": "C:\\Users\\cacardt\\.nuget\\packages\\",
+      "outputPath": "P:\\SAÉ\\SAE201\\github\\SAE201\\Code\\Gestion_Medicament\\Gestion_Medicament\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\sztarkj\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\cacardt\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
