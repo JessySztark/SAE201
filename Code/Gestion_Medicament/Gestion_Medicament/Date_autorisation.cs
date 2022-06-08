@@ -9,7 +9,7 @@ public class Date_autorisation : CRUD<Date_autorisation>{
 	
 	}
 
-	//private Est_autorisé[] est_autorisés;
+	private Est_autorisé[] est_autorisés;
 
     public DateTime Date
     {
@@ -53,7 +53,7 @@ public class Date_autorisation : CRUD<Date_autorisation>{
         {
             if (access.openConnection())
             {
-                reader = access.getData("select * from DATE_AUTORISATION");
+                reader = access.getData("select * from [DATE_AUTORISATION]"); // [BT3].[IUT-ACY\\sztarkj].
                 if (reader.HasRows)
                 {
                     while (reader.Read())

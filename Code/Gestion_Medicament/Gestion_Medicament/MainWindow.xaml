@@ -12,20 +12,66 @@
     <Grid>
         <ListView
             x:Name="lvMaladie"
-            Margin="43,29,481,77"
+            Margin="43,29,481,277"
             ItemsSource="{Binding listeMaladies, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn
-                        Width="90"
+                        Width="120"
                         DisplayMemberBinding="{Binding IdMaladie}"
                         Header="ID maladie" />
                     <GridViewColumn
-                        Width="90"
+                        Width="120"
                         DisplayMemberBinding="{Binding NomMaladie}"
                         Header="Nom maladie" />
                 </GridView>
             </ListView.View>
         </ListView>
+
+
+
+        <ListView
+            x:Name="lvMedicament"
+            Margin="365,29,115,277"
+            ItemsSource="{Binding listeMedicaments, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn
+                        Width="100"
+                        DisplayMemberBinding="{Binding Idmedicament}"
+                        Header="ID médicament" />
+                    <GridViewColumn
+                        Width="120"
+                        DisplayMemberBinding="{Binding NomMedicament}"
+                        Header="Nom médicament" />
+                    <GridViewColumn
+                        Width="Auto"
+                        DisplayMemberBinding="{Binding IdCategorie}"
+                        Header="ID Catégorie" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+
+
+        <ListView
+            x:Name="lvCategorie"
+            Margin="43,201,481,105"
+            ItemsSource="{Binding listeCategories, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn
+                        Width="120"
+                        DisplayMemberBinding="{Binding IdCategorie}"
+                        Header="ID categorie" />
+                    <GridViewColumn
+                        Width="120"
+                        DisplayMemberBinding="{Binding NomCategorie}"
+                        Header="Nom categorie" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+
     </Grid>
 </Window>
