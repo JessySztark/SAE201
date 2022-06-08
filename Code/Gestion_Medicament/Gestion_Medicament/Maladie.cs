@@ -82,13 +82,13 @@ public class Maladie : CRUD<Maladie>{
         {
             if (access.openConnection())
             {
-                reader = access.getData("select * from MALADIE");//[BT3].[IUT-ACY\\dbo].[MALADIE]
+                reader = access.getData("select * from [MALADIE]"); //[BT3].[IUT-ACY\\sztarkj].
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
                         Maladie uneMaladie = new Maladie();
-                        uneMaladie.IdMaladie = (int)reader.GetInt64(0);
+                        uneMaladie.IdMaladie = (int)reader.GetDecimal(0);
                         uneMaladie.NomMaladie = reader.GetString(1);
                         ListeMaladies.Add(uneMaladie);
                     }

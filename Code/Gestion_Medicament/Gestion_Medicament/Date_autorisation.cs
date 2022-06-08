@@ -53,7 +53,7 @@ public class Date_autorisation : CRUD<Date_autorisation>{
         {
             if (access.openConnection())
             {
-                reader = access.getData("select * from DATE_AUTORISATION");//[BT3].[IUT-ACY\\dbo].[DATE_AUTORISATION]
+                reader = access.getData("select * from DATE_AUTORISATION");
                 if (reader.HasRows)
                 {
                     while (reader.Read())
