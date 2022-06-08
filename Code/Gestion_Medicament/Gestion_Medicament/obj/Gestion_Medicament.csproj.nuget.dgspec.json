@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "P:\\S2\\SAE\\SAE2.01\\GITHUB\\SAE201\\Code\\Gestion_Medicament\\Gestion_Medicament\\Gestion_Medicament.csproj": {}
+    "P:\\SAÉ\\SAE201\\github\\SAE201\\Code\\Gestion_Medicament\\Gestion_Medicament\\Gestion_Medicament.csproj": {}
   },
   "projects": {
-    "P:\\S2\\SAE\\SAE2.01\\GITHUB\\SAE201\\Code\\Gestion_Medicament\\Gestion_Medicament\\Gestion_Medicament.csproj": {
+    "P:\\SAÉ\\SAE201\\github\\SAE201\\Code\\Gestion_Medicament\\Gestion_Medicament\\Gestion_Medicament.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "P:\\S2\\SAE\\SAE2.01\\GITHUB\\SAE201\\Code\\Gestion_Medicament\\Gestion_Medicament\\Gestion_Medicament.csproj",
+        "projectUniqueName": "P:\\SAÉ\\SAE201\\github\\SAE201\\Code\\Gestion_Medicament\\Gestion_Medicament\\Gestion_Medicament.csproj",
         "projectName": "Gestion_Medicament",
-        "projectPath": "P:\\S2\\SAE\\SAE2.01\\GITHUB\\SAE201\\Code\\Gestion_Medicament\\Gestion_Medicament\\Gestion_Medicament.csproj",
-        "packagesPath": "C:\\Users\\soudant\\.nuget\\packages\\",
-        "outputPath": "P:\\S2\\SAE\\SAE2.01\\GITHUB\\SAE201\\Code\\Gestion_Medicament\\Gestion_Medicament\\obj\\",
+        "projectPath": "P:\\SAÉ\\SAE201\\github\\SAE201\\Code\\Gestion_Medicament\\Gestion_Medicament\\Gestion_Medicament.csproj",
+        "packagesPath": "C:\\Users\\cacardt\\.nuget\\packages\\",
+        "outputPath": "P:\\SAÉ\\SAE201\\github\\SAE201\\Code\\Gestion_Medicament\\Gestion_Medicament\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\soudant\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\cacardt\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
