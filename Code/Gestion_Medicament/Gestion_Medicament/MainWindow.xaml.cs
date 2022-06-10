@@ -25,6 +25,10 @@ namespace Gestion_Medicament
             InitializeComponent();
             ApplicationData.loadApplicationData();
             lvMaladie.ItemsSource = ApplicationData.listeMaladies;
+            lvCategorie.ItemsSource = ApplicationData.listeCategories;
+            lvMedicament.ItemsSource = ApplicationData.listeMedicaments;
+            lvDate.ItemsSource = ApplicationData.listeDates;
+            lvAutorisation.ItemsSource = ApplicationData.listeAutorisations;
             this.DataContext = this;
         }
     }
