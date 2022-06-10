@@ -28,14 +28,14 @@ namespace Gestion_Medicament
             lvMaladie.ItemsSource = ApplicationData.listeMaladies;
             lvCategorie.ItemsSource = ApplicationData.listeCategories;
             lvMedicament.ItemsSource = ApplicationData.listeMedicaments;
-            lvDate.ItemsSource = ApplicationData.listeDates;
+            //lvDate.ItemsSource = ApplicationData.listeDates;
             lvAutorisation.ItemsSource = ApplicationData.listeAutorisations;
             this.DataContext = this;
         }
 
         private void AjouterMedicament(object sender, RoutedEventArgs e)
         {
-            Medicament m = new Medicament(Int32.Parse(AddIDCatMedicament.Text), AddNomMedicament.Text);
+            Medicament m = new Medicament(Int32.Parse(AddCatMed.Text), AddNomMed.Text);
             m.AddMedicament();
             lvMedicament.Items.Refresh();
         }
@@ -45,5 +45,16 @@ namespace Gestion_Medicament
             lvMedicament.Items.Refresh();
         }
 
+        private void SupprimerMedicament(object sender, RoutedEventArgs e) {
+            Medicament m = new Medicament();
+            m.DelMedicament(Int32.Parse(DelMedText.Text));
+            lvMedicament.Items.Refresh();
+        }
+
+        private void ViderMedicament(object sender, RoutedEventArgs e) {
+            Medicament m = new Medicament();
+            m.Trunc();
+            lvMedicament.Items.Refresh();
+        }
     }
 }

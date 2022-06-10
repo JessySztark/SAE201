@@ -141,11 +141,29 @@ public class Medicament : CRUD<Medicament>{
         DataAccess access = new DataAccess();
         if (access.openConnection())
         {
-            if (access.setData($"INSERT INTO MEDICAMENT VALUES('{this.IdCategorie},{this.NomMedicament}');"))
+            if (access.setData($"INSERT INTO MEDICAMENT VALUES({this.IdCategorie},'{this.NomMedicament}');"))
             {
                 
             }
         }
     }
+    public void DelMedicament(int idmed) {
+        SqlDataAdapter adapter;
+        DataAccess access = new DataAccess();
+        if (access.openConnection()) {
+            if (access.setData($"DELETE FROM MEDICAMENT WHERE idmedicament = {idmed}")) {
 
+            }
+        }
+    }
+
+    public void Trunc() {
+        SqlDataAdapter adapter;
+        DataAccess access = new DataAccess();
+        if (access.openConnection()) {
+            if (access.setData($"TRUNCATE TABLE MEDICAMENT")) {
+
+            }
+        }
+    }
 }

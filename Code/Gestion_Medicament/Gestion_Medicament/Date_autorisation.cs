@@ -84,3 +84,21 @@ public class Date_autorisation : CRUD<Date_autorisation>{
     }
 
 }
+
+/*
+
+    < ListView
+            x: Name = "lvDate"
+            Margin = "365,201,115,105"
+            ItemsSource = "{Binding listeDates, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}" >
+            < ListView.View >
+                < GridView >
+                    < GridViewColumn
+                        Width = "300"
+                        DisplayMemberBinding = "{Binding Date}"
+                        Header = "Date" />
+                </ GridView >
+            </ ListView.View >
+        </ ListView >
+
+ */
