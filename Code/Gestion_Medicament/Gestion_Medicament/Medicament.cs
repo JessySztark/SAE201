@@ -13,7 +13,13 @@ public class Medicament : CRUD<Medicament>{
 
     }
 
-	private CategorieMedicament[] categorieMedicaments;
+    public Medicament(int idcategorie, String nommedicament)
+    {
+        this.IdCategorie = idcategorie;
+        this.NomMedicament = nommedicament;
+    }
+
+    private CategorieMedicament[] categorieMedicaments;
 	private Est_autorisé[] est_autorisés;
 
     public int Idmedicament
@@ -127,6 +133,19 @@ public class Medicament : CRUD<Medicament>{
     public List<Medicament> FindBySelection(ref string criteres)
     {
         throw new NotImplementedException();
+    }
+
+    public void AddMedicament()
+    {
+        SqlDataAdapter adapter;
+        DataAccess access = new DataAccess();
+        if (access.openConnection())
+        {
+            if (access.setData($"INSERT INTO MEDICAMENT VALUES('{this.IdCategorie},{this.NomMedicament}');"))
+            {
+                
+            }
+        }
     }
 
 }

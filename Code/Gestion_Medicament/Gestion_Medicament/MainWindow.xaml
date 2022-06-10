@@ -12,8 +12,8 @@
     <Grid>
         <ListView
             x:Name="lvMaladie"
-            Margin="34,131,490,175"
-            ItemsSource="{Binding listeMaladies, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}" BorderBrush="#FF828790" OpacityMask="#FFD34C4C" Foreground="White">
+            Margin="43,29,481,277"
+            ItemsSource="{Binding listeMaladies, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn
@@ -32,8 +32,9 @@
 
         <ListView
             x:Name="lvMedicament"
-            Margin="325,131,155,175"
-            ItemsSource="{Binding listeMedicaments, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
+            Margin="365,29,115,277"
+            ItemsSource="{Binding listeMedicaments, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+            SelectionChanged="lvMedicament_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn
@@ -56,7 +57,7 @@
 
         <ListView
             x:Name="lvCategorie"
-            Margin="34,277,490,29"
+            Margin="43,201,481,105"
             ItemsSource="{Binding listeCategories, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
             <ListView.View>
                 <GridView>
@@ -116,6 +117,30 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <Button
+            Width="62"
+            Height="31"
+            Margin="623,162,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="AjouterMedicament"
+            Content="Ajouter" />
+        <TextBox
+            x:Name="AddNomMedicament"
+            Width="126"
+            Height="31"
+            Margin="365,162,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            TextWrapping="Wrap" />
+        <TextBox
+            x:Name="AddIDCatMedicament"
+            Width="121"
+            Height="31"
+            Margin="496,162,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            TextWrapping="Wrap" />
 
 
     </Grid>

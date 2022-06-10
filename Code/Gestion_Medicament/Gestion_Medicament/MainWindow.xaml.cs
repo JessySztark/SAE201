@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,5 +32,18 @@ namespace Gestion_Medicament
             lvAutorisation.ItemsSource = ApplicationData.listeAutorisations;
             this.DataContext = this;
         }
+
+        private void AjouterMedicament(object sender, RoutedEventArgs e)
+        {
+            Medicament m = new Medicament(Int32.Parse(AddIDCatMedicament.Text), AddNomMedicament.Text);
+            m.AddMedicament();
+            lvMedicament.Items.Refresh();
+        }
+
+        private void lvMedicament_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            lvMedicament.Items.Refresh();
+        }
+
     }
 }
