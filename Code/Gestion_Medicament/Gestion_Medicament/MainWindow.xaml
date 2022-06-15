@@ -151,6 +151,22 @@
             VerticalAlignment="Top"
             Click="ViderMedicament"
             Content="Truncate" />
+        <TextBox
+            x:Name="AddNomMaladie"
+            Width="126"
+            Height="31"
+            Margin="55,161,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            TextWrapping="Wrap" />
+        <Button
+            Width="62"
+            Height="31"
+            Margin="197,161,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="AjouterMaladie"
+            Content="Ajouter" />
 
 
     </Grid>

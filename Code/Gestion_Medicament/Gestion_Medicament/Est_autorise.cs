@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-
+namespace Gestion_Medicament {
 public class Est_autorisé : CRUD<Est_autorisé>
 {
     private String commentaire;
@@ -124,8 +124,15 @@ public class Est_autorisé : CRUD<Est_autorisé>
 
     public void Create()
     {
-        throw new NotImplementedException();
-    }
+            DataAccess access = new DataAccess();
+            if (access.openConnection())
+            {
+                if (access.setData($"INSERT INTO EST_AUTORISE VALUES({this.IdMedicament},{this.IdMaladie},'{this.UneDate}');"))
+                {
+
+                }
+            }
+        }
 
     public void Read()
     {
@@ -137,10 +144,17 @@ public class Est_autorisé : CRUD<Est_autorisé>
         throw new NotImplementedException();
     }
 
-    public void Delete()
+    public void Delete(int id)
     {
-        throw new NotImplementedException();
-    }
+            DataAccess access = new DataAccess();
+            if (access.openConnection())
+            {
+                if (access.setData($"DELETE FROM AUTORISATION WHERE idmedicament = {id}"))
+                {
+
+                }
+            }
+        }
 
     public List<Est_autorisé> FindAll()
     {
@@ -184,4 +198,5 @@ public class Est_autorisé : CRUD<Est_autorisé>
     {
         throw new NotImplementedException();
     }
+}
 }

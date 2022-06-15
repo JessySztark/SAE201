@@ -2,114 +2,137 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 
-public class Maladie : CRUD<Maladie>{
-    private String nomMaladie;
-    private int idMaladie;
-    List<Maladie> listeMaladies;
-
-    public Maladie()
+namespace Gestion_Medicament
+{
+    public class Maladie : CRUD<Maladie>
     {
-        
-    }
+        private String nomMaladie;
+        private int idMaladie;
+        List<Maladie> listeMaladies;
 
-    private Est_autorisé[] est_autorisés;
-
-    public string NomMaladie
-    {
-        get
+        public Maladie()
         {
-            return this.nomMaladie;
+
         }
 
-        set
+        public Maladie(String nomMaladie)
         {
-            this.nomMaladie = value;
-        }
-    }
-
-    public int IdMaladie
-    {
-        get
-        {
-            return this.idMaladie;
+            this.NomMaladie = nomMaladie;
         }
 
-        set
+        private Est_autorisé[] est_autorisés;
+
+        public string NomMaladie
         {
-            this.idMaladie = value;
-        }
-    }
-
-    public List<Maladie> ListeMaladies
-    {
-        get
-        {
-            return this.listeMaladies;
-        }
-
-        set
-        {
-            this.listeMaladies = value;
-        }
-    }
-
-    public void Create()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Read()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Update()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Delete()
-    {
-        throw new NotImplementedException();
-    }
-
-    public List<Maladie> FindAll()
-    {
-         ListeMaladies= new List<Maladie>();
-        DataAccess access = new DataAccess();
-        SqlDataReader reader;
-        try
-        {
-            if (access.openConnection())
+            get
             {
-                reader = access.getData("select * from [MALADIE]");
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        Maladie uneMaladie = new Maladie();
-                        uneMaladie.IdMaladie = (int)reader.GetDecimal(0);
-                        uneMaladie.NomMaladie = reader.GetString(1);
-                        ListeMaladies.Add(uneMaladie);
-                    }
-                }
-                else
-                {
-                    System.Windows.MessageBox.Show("No rows found.", "Important Message");
-                }
-                reader.Close();
-                access.closeConnection();
+                return this.nomMaladie;
+            }
+
+            set
+            {
+                this.nomMaladie = value;
             }
         }
-        catch (Exception ex)
-        {
-            System.Windows.MessageBox.Show(ex.Message, "Important Message");
-        }
-        return ListeMaladies;
-    }
 
-    public List<Maladie> FindBySelection(ref string criteres)
-    {
-        throw new NotImplementedException();
+        public int IdMaladie
+        {
+            get
+            {
+                return this.idMaladie;
+            }
+
+            set
+            {
+                this.idMaladie = value;
+            }
+        }
+
+        public List<Maladie> ListeMaladies
+        {
+            get
+            {
+                return this.listeMaladies;
+            }
+
+            set
+            {
+                this.listeMaladies = value;
+            }
+        }
+
+        public void Create()
+        {
+            DataAccess access = new DataAccess();
+            if (access.openConnection())
+            {
+                if (access.setData($"INSERT INTO MALADIE VALUES('{this.NomMaladie}');"))
+                {
+
+                }
+            }
+        }
+
+        public void Read()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(int id)
+        {
+            DataAccess access = new DataAccess();
+            if (access.openConnection())
+            {
+                if (access.setData($"DELETE FROM MALADIE WHERE idmaladie = {id}"))
+                {
+
+                }
+            }
+        }
+
+        public List<Maladie> FindAll()
+        {
+            ListeMaladies = new List<Maladie>();
+            DataAccess access = new DataAccess();
+            SqlDataReader reader;
+            try
+            {
+                if (access.openConnection())
+                {
+                    reader = access.getData("select * from [MALADIE]");
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            Maladie uneMaladie = new Maladie();
+                            uneMaladie.IdMaladie = (int)reader.GetDecimal(0);
+                            uneMaladie.NomMaladie = reader.GetString(1);
+                            ListeMaladies.Add(uneMaladie);
+                        }
+                    }
+                    else
+                    {
+                        System.Windows.MessageBox.Show("No rows found.", "Important Message");
+                    }
+                    reader.Close();
+                    access.closeConnection();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.Message, "Important Message");
+            }
+            return ListeMaladies;
+        }
+
+        public List<Maladie> FindBySelection(ref string criteres)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

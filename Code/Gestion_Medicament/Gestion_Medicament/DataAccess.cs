@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 
-    class DataAccess:CRUD<DataAccess>
+namespace Gestion_Medicament
+{
+    class DataAccess : CRUD<DataAccess>
     {
         private SqlConnection connection;
 
@@ -15,12 +17,12 @@ using System.Data.SqlClient;
             try
             {
                 this.connection = new SqlConnection();
-                
+
                 this.connection.ConnectionString =
                 "Data Source=srv-jupiter.iut-acy.local;" +
                 "Initial Catalog=BT3;" +
                 "Integrated Security=SSPI;";
-                
+
                 this.connection.Open();
                 if (this.connection.State.Equals(System.Data.ConnectionState.Open))
                 {
@@ -59,11 +61,11 @@ using System.Data.SqlClient;
         public SqlDataReader getData(String getQuery)
         {
             SqlDataReader reader = null;
-            
+
             try
             {
-                    SqlCommand command = new SqlCommand(getQuery, this.connection);
-                    reader = command.ExecuteReader();
+                SqlCommand command = new SqlCommand(getQuery, this.connection);
+                reader = command.ExecuteReader();
             }
             catch (Exception ex)
             {
@@ -108,27 +110,34 @@ using System.Data.SqlClient;
             return ret;
         }
 
-    public void Create() {
-        throw new NotImplementedException();
-    }
+        public void Create()
+        {
+            throw new NotImplementedException();
+        }
 
-    public void Read() {
-        throw new NotImplementedException();
-    }
+        public void Read()
+        {
+            throw new NotImplementedException();
+        }
 
-    public void Update() {
-        throw new NotImplementedException();
-    }
+        public void Update()
+        {
+            throw new NotImplementedException();
+        }
 
-    public void Delete() {
-        throw new NotImplementedException();
-    }
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
 
-    public List<DataAccess> FindAll() {
-        throw new NotImplementedException();
-    }
+        public List<DataAccess> FindAll()
+        {
+            throw new NotImplementedException();
+        }
 
-    public List<DataAccess> FindBySelection(ref string criteres) {
-        throw new NotImplementedException();
+        public List<DataAccess> FindBySelection(ref string criteres)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

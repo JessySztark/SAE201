@@ -36,7 +36,8 @@ namespace Gestion_Medicament
         private void AjouterMedicament(object sender, RoutedEventArgs e)
         {
             Medicament m = new Medicament(Int32.Parse(AddCatMed.Text), AddNomMed.Text);
-            m.AddMedicament();
+            m.Create();
+            ApplicationData.listeMedicaments.Add(m);
             lvMedicament.Items.Refresh();
         }
 
@@ -47,7 +48,8 @@ namespace Gestion_Medicament
 
         private void SupprimerMedicament(object sender, RoutedEventArgs e) {
             Medicament m = new Medicament();
-            m.DelMedicament(Int32.Parse(DelMedText.Text));
+            m.Delete(Int32.Parse(DelMedText.Text));
+            ApplicationData.listeMedicaments.Remove(m);
             lvMedicament.Items.Refresh();
         }
 
@@ -55,6 +57,14 @@ namespace Gestion_Medicament
             Medicament m = new Medicament();
             m.Trunc();
             lvMedicament.Items.Refresh();
+        }
+
+        private void AjouterMaladie(object sender, RoutedEventArgs e)
+        {
+            Maladie m = new Maladie(AddNomMaladie.Text);
+            m.Create();
+            ApplicationData.listeMaladies.Add(m);
+            lvMaladie.Items.Refresh();
         }
     }
 }
