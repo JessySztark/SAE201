@@ -5,168 +5,814 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Gestion_Medicament"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="MainWindow"
+    Title="Gestion médicament"
     Width="800"
     Height="450"
     mc:Ignorable="d">
+    <Window.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle
+                            Margin="2"
+                            SnapsToDevicePixels="true"
+                            Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                            StrokeDashArray="1 2"
+                            StrokeThickness="1" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <LinearGradientBrush x:Key="TabItem.Static.Background" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Offset="0.0" Color="#0000" />
+            <GradientStop Offset="1.0" Color="#0000" />
+        </LinearGradientBrush>
+        <SolidColorBrush x:Key="TabItem.Static.Border" Color="#0000" />
+        <LinearGradientBrush x:Key="TabItem.MouseOver.Background" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Offset="0.0" Color="#0000" />
+            <GradientStop Offset="1.0" Color="#0000" />
+        </LinearGradientBrush>
+        <SolidColorBrush x:Key="TabItem.MouseOver.Border" Color="#0000" />
+        <SolidColorBrush x:Key="TabItem.Selected.Background" Color="#fff" />
+        <SolidColorBrush x:Key="TabItem.Selected.Border" Color="#0000" />
+        <SolidColorBrush x:Key="TabItem.Disabled.Background" Color="#Fff" />
+        <SolidColorBrush x:Key="TabItem.Disabled.Border" Color="#0000" />
+        <Style x:Key="TabItemStyle" TargetType="{x:Type TabItem}">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="Foreground" Value="#FFF" />
+            <Setter Property="Background" Value="#0000" />
+            <Setter Property="BorderBrush" Value="#0000" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Padding" Value="6,2,6,2" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
+                            <Border
+                                x:Name="mainBorder"
+                                Margin="0"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="#0000"
+                                BorderThickness="1,1,1,0"
+                                CornerRadius="3,3,0,0">
+                                <Border
+                                    x:Name="innerBorder"
+                                    Margin="0"
+                                    Background="{StaticResource TabItem.Selected.Background}"
+                                    BorderBrush="#0000"
+                                    BorderThickness="1,1,1,0"
+                                    CornerRadius="10,10,0,0"
+                                    Opacity="0" />
+                            </Border>
+                            <ContentPresenter
+                                x:Name="contentPresenter"
+                                Margin="{TemplateBinding Padding}"
+                                HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                ContentSource="Header"
+                                Focusable="False"
+                                RecognizesAccessKey="True"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Foreground" Value="#384F26" />
+                            </Trigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true" />
+                                    <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Left" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter TargetName="mainBorder" Property="Background" Value="{StaticResource TabItem.MouseOver.Background}" />
+                                <Setter TargetName="mainBorder" Property="BorderBrush" Value="{StaticResource TabItem.MouseOver.Border}" />
+                                <Setter TargetName="innerBorder" Property="BorderThickness" Value="1,1,0,1" />
+                                <Setter TargetName="mainBorder" Property="BorderThickness" Value="1,1,0,1" />
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true" />
+                                    <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Bottom" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter TargetName="mainBorder" Property="Background" Value="{StaticResource TabItem.MouseOver.Background}" />
+                                <Setter TargetName="mainBorder" Property="BorderBrush" Value="{StaticResource TabItem.MouseOver.Border}" />
+                                <Setter TargetName="innerBorder" Property="BorderThickness" Value="1,0,1,1" />
+                                <Setter TargetName="mainBorder" Property="BorderThickness" Value="1,0,1,1" />
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true" />
+                                    <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Right" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter TargetName="mainBorder" Property="Background" Value="{StaticResource TabItem.MouseOver.Background}" />
+                                <Setter TargetName="mainBorder" Property="BorderBrush" Value="{StaticResource TabItem.MouseOver.Border}" />
+                                <Setter TargetName="innerBorder" Property="BorderThickness" Value="0,1,1,1" />
+                                <Setter TargetName="mainBorder" Property="BorderThickness" Value="0,1,1,1" />
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true" />
+                                    <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Top" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter TargetName="mainBorder" Property="Background" Value="{StaticResource TabItem.MouseOver.Background}" />
+                                <Setter TargetName="mainBorder" Property="BorderBrush" Value="{StaticResource TabItem.MouseOver.Border}" />
+                                <Setter TargetName="innerBorder" Property="BorderThickness" Value="1,1,1,0" />
+                                <Setter TargetName="mainBorder" Property="BorderThickness" Value="1,1,1,0" />
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="false" />
+                                    <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Left" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter TargetName="contentPresenter" Property="Opacity" Value="0.56" />
+                                <Setter TargetName="mainBorder" Property="Background" Value="{StaticResource TabItem.Disabled.Background}" />
+                                <Setter TargetName="mainBorder" Property="BorderBrush" Value="{StaticResource TabItem.Disabled.Border}" />
+                                <Setter TargetName="innerBorder" Property="BorderThickness" Value="1,1,0,1" />
+                                <Setter TargetName="mainBorder" Property="BorderThickness" Value="1,1,0,1" />
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="false" />
+                                    <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Bottom" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter TargetName="contentPresenter" Property="Opacity" Value="0.56" />
+                                <Setter TargetName="mainBorder" Property="Background" Value="{StaticResource TabItem.Disabled.Background}" />
+                                <Setter TargetName="mainBorder" Property="BorderBrush" Value="{StaticResource TabItem.Disabled.Border}" />
+                                <Setter TargetName="innerBorder" Property="BorderThickness" Value="1,0,1,1" />
+                                <Setter TargetName="mainBorder" Property="BorderThickness" Value="1,0,1,1" />
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="false" />
+                                    <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Right" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter TargetName="contentPresenter" Property="Opacity" Value="0.56" />
+                                <Setter TargetName="mainBorder" Property="Background" Value="{StaticResource TabItem.Disabled.Background}" />
+                                <Setter TargetName="mainBorder" Property="BorderBrush" Value="{StaticResource TabItem.Disabled.Border}" />
+                                <Setter TargetName="innerBorder" Property="BorderThickness" Value="0,1,1,1" />
+                                <Setter TargetName="mainBorder" Property="BorderThickness" Value="0,1,1,1" />
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="false" />
+                                    <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Top" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter TargetName="contentPresenter" Property="Opacity" Value="0.56" />
+                                <Setter TargetName="mainBorder" Property="Background" Value="{StaticResource TabItem.Disabled.Background}" />
+                                <Setter TargetName="mainBorder" Property="BorderBrush" Value="{StaticResource TabItem.Disabled.Border}" />
+                                <Setter TargetName="innerBorder" Property="BorderThickness" Value="1,1,1,0" />
+                                <Setter TargetName="mainBorder" Property="BorderThickness" Value="1,1,1,0" />
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="false" />
+                                    <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Left" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter TargetName="innerBorder" Property="BorderThickness" Value="1,1,0,1" />
+                                <Setter TargetName="mainBorder" Property="BorderThickness" Value="1,1,0,1" />
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="true" />
+                                    <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Left" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Panel.ZIndex" Value="1" />
+                                <Setter Property="Margin" Value="-2,-2,0,-2" />
+                                <Setter TargetName="innerBorder" Property="Opacity" Value="1" />
+                                <Setter TargetName="innerBorder" Property="BorderThickness" Value="1,1,0,1" />
+                                <Setter TargetName="mainBorder" Property="BorderThickness" Value="1,1,0,1" />
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="false" />
+                                    <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Bottom" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter TargetName="innerBorder" Property="BorderThickness" Value="1,0,1,1" />
+                                <Setter TargetName="mainBorder" Property="BorderThickness" Value="1,0,1,1" />
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="true" />
+                                    <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Bottom" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Panel.ZIndex" Value="1" />
+                                <Setter Property="Margin" Value="-2,0,-2,-2" />
+                                <Setter TargetName="innerBorder" Property="Opacity" Value="1" />
+                                <Setter TargetName="innerBorder" Property="BorderThickness" Value="1,0,1,1" />
+                                <Setter TargetName="mainBorder" Property="BorderThickness" Value="1,0,1,1" />
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="false" />
+                                    <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Right" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter TargetName="innerBorder" Property="BorderThickness" Value="0,1,1,1" />
+                                <Setter TargetName="mainBorder" Property="BorderThickness" Value="0,1,1,1" />
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="true" />
+                                    <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Right" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Panel.ZIndex" Value="1" />
+                                <Setter Property="Margin" Value="0,-2,-2,-2" />
+                                <Setter TargetName="innerBorder" Property="Opacity" Value="1" />
+                                <Setter TargetName="innerBorder" Property="BorderThickness" Value="0,1,1,1" />
+                                <Setter TargetName="mainBorder" Property="BorderThickness" Value="0,1,1,1" />
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="false" />
+                                    <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Top" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter TargetName="innerBorder" Property="BorderThickness" Value="1,1,1,0" />
+                                <Setter TargetName="mainBorder" Property="BorderThickness" Value="1,1,1,0" />
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="true" />
+                                    <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Top" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Panel.ZIndex" Value="1" />
+                                <Setter Property="Margin" Value="-2,-2,-2,0" />
+                                <Setter TargetName="innerBorder" Property="Opacity" Value="1" />
+                                <Setter TargetName="innerBorder" Property="BorderThickness" Value="1,1,1,0" />
+                                <Setter TargetName="mainBorder" Property="BorderThickness" Value="1,1,1,0" />
+                            </MultiDataTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="TabItem.Selected.Background1" Color="#FFFFFF" />
+        <SolidColorBrush x:Key="TabItem.Selected.Border1" Color="#ACACAC" />
+        <Style x:Key="TabControlStyle" TargetType="{x:Type TabControl}">
+            <Setter Property="Padding" Value="2" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Background" Value="#0000" />
+            <Setter Property="BorderBrush" Value="#0000" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabControl}">
+                        <Grid
+                            x:Name="templateRoot"
+                            ClipToBounds="true"
+                            KeyboardNavigation.TabNavigation="Local"
+                            SnapsToDevicePixels="true">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Name="ColumnDefinition0" />
+                                <ColumnDefinition x:Name="ColumnDefinition1" Width="0" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition x:Name="RowDefinition0" Height="Auto" />
+                                <RowDefinition x:Name="RowDefinition1" Height="3*" />
+                            </Grid.RowDefinitions>
+                            <TabPanel
+                                x:Name="headerPanel"
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Margin="2,2,2,0"
+                                Panel.ZIndex="1"
+                                Background="Transparent"
+                                IsItemsHost="true"
+                                KeyboardNavigation.TabIndex="1" />
+                            <Border
+                                x:Name="contentPanel"
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Background="#0000"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="0"
+                                KeyboardNavigation.DirectionalNavigation="Contained"
+                                KeyboardNavigation.TabIndex="2"
+                                KeyboardNavigation.TabNavigation="Local">
+                                <ContentPresenter
+                                    x:Name="PART_SelectedContentHost"
+                                    Margin="{TemplateBinding Padding}"
+                                    ContentSource="SelectedContent"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="TabStripPlacement" Value="Bottom">
+                                <Setter TargetName="headerPanel" Property="Grid.Row" Value="1" />
+                                <Setter TargetName="contentPanel" Property="Grid.Row" Value="0" />
+                                <Setter TargetName="RowDefinition0" Property="Height" Value="*" />
+                                <Setter TargetName="RowDefinition1" Property="Height" Value="Auto" />
+                                <Setter TargetName="headerPanel" Property="Margin" Value="2,0,2,2" />
+                            </Trigger>
+                            <Trigger Property="TabStripPlacement" Value="Left">
+                                <Setter TargetName="headerPanel" Property="Grid.Row" Value="0" />
+                                <Setter TargetName="contentPanel" Property="Grid.Row" Value="0" />
+                                <Setter TargetName="headerPanel" Property="Grid.Column" Value="0" />
+                                <Setter TargetName="contentPanel" Property="Grid.Column" Value="1" />
+                                <Setter TargetName="ColumnDefinition0" Property="Width" Value="Auto" />
+                                <Setter TargetName="ColumnDefinition1" Property="Width" Value="*" />
+                                <Setter TargetName="RowDefinition0" Property="Height" Value="*" />
+                                <Setter TargetName="RowDefinition1" Property="Height" Value="0" />
+                                <Setter TargetName="headerPanel" Property="Margin" Value="2,2,0,2" />
+                            </Trigger>
+                            <Trigger Property="TabStripPlacement" Value="Right">
+                                <Setter TargetName="headerPanel" Property="Grid.Row" Value="0" />
+                                <Setter TargetName="contentPanel" Property="Grid.Row" Value="0" />
+                                <Setter TargetName="headerPanel" Property="Grid.Column" Value="1" />
+                                <Setter TargetName="contentPanel" Property="Grid.Column" Value="0" />
+                                <Setter TargetName="ColumnDefinition0" Property="Width" Value="*" />
+                                <Setter TargetName="ColumnDefinition1" Property="Width" Value="Auto" />
+                                <Setter TargetName="RowDefinition0" Property="Height" Value="*" />
+                                <Setter TargetName="RowDefinition1" Property="Height" Value="0" />
+                                <Setter TargetName="headerPanel" Property="Margin" Value="0,2,2,2" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="templateRoot" Property="TextElement.Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
-        <ListView
-            x:Name="lvMaladie"
-            Margin="43,29,481,277"
-            ItemsSource="{Binding listeMaladies, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.75*" />
+            <RowDefinition Height="4*" />
+        </Grid.RowDefinitions>
+        <Rectangle
+            Grid.Row="1"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Fill="#384F26" />
+        <TabControl
+            Grid.Row="1"
+            FontWeight="Bold"
+            Style="{DynamicResource TabControlStyle}">
+            <TabItem
+                Margin="-2,3,-14,-9"
+                FontSize="20"
+                Header="Maladie"
+                Style="{DynamicResource TabItemStyle}">
+                <Grid Margin="0,5,0,1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="0.75*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="283*" />
+                        <ColumnDefinition Width="256*" />
+                        <ColumnDefinition Width="256*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/background.png" Stretch="UniformToFill" />
+                    </Grid.Background>
+                    <DataGrid
+                        x:Name="lvMaladie"
+                        Grid.RowSpan="2"
+                        Margin="10,10,21,10"
+                        AutoGenerateColumns="False"
+                        ItemsSource="{Binding listeMaladies, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding IdMaladie}" Header="ID" />
+                            <DataGridTextColumn Binding="{Binding NomMaladie}" Header="Nom" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Label
+                        Grid.Column="1"
+                        Margin="10,10,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Background="{x:Null}"
+                        Content="Ajout : "
+                        Foreground="#FF384F26" />
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="10,10,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Suppression :"
+                        Foreground="#FF384F26" />
+                    <TextBox
+                        x:Name="AddNomMaladie"
+                        Grid.Column="1"
                         Width="120"
-                        DisplayMemberBinding="{Binding IdMaladie}"
-                        Header="ID maladie" />
-                    <GridViewColumn
+                        Margin="82,59,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        TextWrapping="Wrap" />
+                    <Label
+                        Grid.Column="1"
+                        Margin="10,52,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        HorizontalContentAlignment="Right"
+                        VerticalContentAlignment="Center"
+                        Content="Nom :" />
+                    <Button
+                        Grid.Column="1"
+                        Margin="65,105,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Ajouter" />
+                    <TextBox
+                        Grid.Row="1"
+                        Grid.Column="1"
                         Width="120"
-                        DisplayMemberBinding="{Binding NomMaladie}"
-                        Header="Nom maladie" />
-                </GridView>
-            </ListView.View>
-        </ListView>
-
-
-
-        <ListView
-            x:Name="lvMedicament"
-            Margin="365,29,115,141"
-            ItemsSource="{Binding listeMedicaments, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
-            SelectionChanged="lvMedicament_SelectionChanged">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn
-                        Width="100"
-                        DisplayMemberBinding="{Binding Idmedicament}"
-                        Header="ID médicament" />
-                    <GridViewColumn
+                        Margin="84,59,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        TextWrapping="Wrap" />
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="12,52,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        HorizontalContentAlignment="Right"
+                        VerticalContentAlignment="Center"
+                        Content="Nom :" />
+                    <Button
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="67,96,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Supprimer" />
+                    <Label
+                        Grid.Column="2"
+                        Margin="13,10,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Modification : "
+                        Foreground="#FF384F26" />
+                    <TextBox
+                        Grid.Column="2"
                         Width="120"
-                        DisplayMemberBinding="{Binding NomMedicament}"
-                        Header="Nom médicament" />
-                    <GridViewColumn
-                        Width="Auto"
-                        DisplayMemberBinding="{Binding IdCategorie}"
-                        Header="ID Catégorie" />
-                </GridView>
-            </ListView.View>
-        </ListView>
-
-
-
-        <ListView
-            x:Name="lvCategorie"
-            Margin="43,201,481,105"
-            ItemsSource="{Binding listeCategories, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn
+                        Margin="87,59,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        TextWrapping="Wrap" />
+                    <Label
+                        Grid.Column="2"
+                        Width="67"
+                        Margin="15,52,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        HorizontalContentAlignment="Right"
+                        Content="ID:" />
+                    <Button
+                        Grid.Column="2"
+                        Margin="70,142,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Modifier" />
+                    <TextBox
+                        Grid.Column="2"
                         Width="120"
-                        DisplayMemberBinding="{Binding IdCategorie}"
-                        Header="ID categorie" />
-                    <GridViewColumn
+                        Margin="87,101,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        TextWrapping="Wrap" />
+                    <Label
+                        Grid.Column="2"
+                        Margin="15,94,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        HorizontalContentAlignment="Right"
+                        VerticalContentAlignment="Center"
+                        Content="Nom :" />
+                </Grid>
+            </TabItem>
+
+            <TabItem
+                Margin="21,3,-35,-8"
+                FontSize="20"
+                Header="Médicament"
+                Style="{DynamicResource TabItemStyle}">
+                <Grid Margin="0,5,0,1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="0.75*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="283*" />
+                        <ColumnDefinition Width="256*" />
+                        <ColumnDefinition Width="256*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.Background>
+                        <ImageBrush
+                            ImageSource="/background.png"
+                            Stretch="UniformToFill"
+                            TileMode="FlipX" />
+                    </Grid.Background>
+                    <DataGrid
+                        x:Name="lvMedicament"
+                        Grid.RowSpan="2"
+                        Margin="10,10,30,10"
+                        AutoGenerateColumns="False"
+                        ItemsSource="{Binding listeMedicaments, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+                        SelectionChanged="lvMedicament_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Idmedicament}" Header="ID" />
+                            <DataGridTextColumn Binding="{Binding NomMedicament}" Header="Nom" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button
+                        Grid.Column="1"
+                        Margin="86,146,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Ajouter" />
+                    <Label
+                        Grid.Column="1"
+                        Margin="10,52,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        HorizontalContentAlignment="Right"
+                        Content="Nom :" />
+                    <TextBox
+                        x:Name="AddNomMed"
+                        Grid.Column="1"
                         Width="120"
-                        DisplayMemberBinding="{Binding NomCategorie}"
-                        Header="Nom categorie" />
-                </GridView>
-            </ListView.View>
-        </ListView>
+                        Margin="78,60,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        TextWrapping="Wrap" />
+                    <Label
+                        Grid.Column="1"
+                        Margin="10,10,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Ajout :"
+                        Foreground="#FF384F26" />
+                    <Button
+                        Grid.Column="2"
+                        Margin="86,143,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Modiifer" />
+                    <Label
+                        Grid.Column="2"
+                        Width="63"
+                        Margin="10,52,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        HorizontalContentAlignment="Right"
+                        Content="ID :" />
+                    <TextBox
+                        Grid.Column="2"
+                        Width="120"
+                        Margin="78,60,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        TextWrapping="Wrap" />
+                    <Label
+                        Grid.Column="2"
+                        Margin="10,10,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Modification :"
+                        Foreground="#FF384F26" />
+                    <Label
+                        Grid.Column="2"
+                        Margin="10,92,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        HorizontalContentAlignment="Right"
+                        Content="Nom :" />
+                    <TextBox
+                        Grid.Column="2"
+                        Width="120"
+                        Margin="78,100,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        TextWrapping="Wrap" />
+                    <Button
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="86,99,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Supprimer" />
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="10,52,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        HorizontalContentAlignment="Right"
+                        Content="Nom :" />
+                    <TextBox
+                        x:Name="DelMedText"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Width="120"
+                        Margin="78,60,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        TextWrapping="Wrap" />
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="10,10,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Suppression :"
+                        Foreground="#FF384F26" />
+                    <Label
+                        Grid.Column="1"
+                        Margin="11,96,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        HorizontalContentAlignment="Right"
+                        Content="Cat :" />
+                    <TextBox
+                        x:Name="AddCatMed"
+                        Grid.Column="1"
+                        Width="120"
+                        Margin="78,100,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        TextWrapping="Wrap" />
+                </Grid>
+            </TabItem>
+            <TabItem
+                Margin="37,3,-53,-9"
+                FontSize="20"
+                Header="Catégorie"
+                Style="{DynamicResource TabItemStyle}">
+                <Grid Margin="0,5,0,1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="0.75*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="283*" />
+                        <ColumnDefinition Width="256*" />
+                        <ColumnDefinition Width="256*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/background.png" Stretch="UniformToFill" />
+                    </Grid.Background>
+                    <DataGrid
+                        x:Name="lvCategorie"
+                        Grid.RowSpan="2"
+                        Margin="10,10,10,10"
+                        AutoGenerateColumns="False"
+                        ItemsSource="{Binding listeCategories, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding IdCategorie}" Header="ID" />
+                            <DataGridTextColumn Binding="{Binding NomCategorie}" Header="Nom" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Label
+                        Grid.Column="1"
+                        Margin="10,10,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Background="{x:Null}"
+                        Content="Ajout : "
+                        Foreground="#FF384F26" />
+                    <Label
+                        Grid.Column="1"
+                        Margin="10,52,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        HorizontalContentAlignment="Right"
+                        VerticalContentAlignment="Center"
+                        Content="Nom :" />
+                    <Button
+                        Grid.Column="1"
+                        Margin="65,105,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Ajouter" />
+                    <TextBox
+                        Grid.Column="1"
+                        Width="120"
+                        Margin="82,59,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        TextWrapping="Wrap" />
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="10,10,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Suppression :"
+                        Foreground="#FF384F26" />
+                    <Button
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="67,96,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Supprimer" />
+                    <TextBox
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Width="120"
+                        Margin="84,59,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        TextWrapping="Wrap" />
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="12,52,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        HorizontalContentAlignment="Right"
+                        VerticalContentAlignment="Center"
+                        Content="Nom :" />
+                    <Label
+                        Grid.Column="2"
+                        Margin="13,10,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Modification : "
+                        Foreground="#FF384F26" />
+                    <Label
+                        Grid.Column="2"
+                        Margin="15,94,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        HorizontalContentAlignment="Right"
+                        VerticalContentAlignment="Center"
+                        Content="Nom :" />
+                    <Label
+                        Grid.Column="2"
+                        Width="67"
+                        Margin="15,52,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        HorizontalContentAlignment="Right"
+                        Content="ID:" />
+                    <Button
+                        Grid.Column="2"
+                        Margin="70,142,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Modifier" />
+                    <TextBox
+                        Grid.Column="2"
+                        Width="120"
+                        Margin="87,59,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        TextWrapping="Wrap" />
+                    <TextBox
+                        Grid.Column="2"
+                        Width="120"
+                        Margin="87,101,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        TextWrapping="Wrap" />
+                </Grid>
+            </TabItem>
 
-
-        <ListView
-            x:Name="lvAutorisation"
-            Margin="43,355,115,10"
-            ItemsSource="{Binding listeAutorisations, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn
-                        Width="100"
-                        DisplayMemberBinding="{Binding IdMedicament}"
-                        Header="ID Médicament" />
-                    <GridViewColumn
-                        Width="150"
-                        DisplayMemberBinding="{Binding NomMedicament}"
-                        Header="Nom Médicament" />
-                    <GridViewColumn
-                        Width="100"
-                        DisplayMemberBinding="{Binding IdMaladie}"
-                        Header="ID Maladie" />
-                    <GridViewColumn
-                        Width="150"
-                        DisplayMemberBinding="{Binding NomMaladie}"
-                        Header="Nom Maladie" />
-                    <GridViewColumn
-                        Width="130"
-                        DisplayMemberBinding="{Binding UneDate}"
-                        Header="Date autorisation" />
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <Button
-            Width="62"
-            Height="31"
-            Margin="623,298,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Click="AjouterMedicament"
-            Content="Ajouter" />
-        <TextBox
-            x:Name="AddNomMed"
-            Width="126"
-            Height="31"
-            Margin="365,298,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            TextWrapping="Wrap" />
-        <TextBox
-            x:Name="AddCatMed"
-            Width="121"
-            Height="31"
-            Margin="496,298,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            TextWrapping="Wrap" />
-        <TextBox
-            x:Name="DelMedText"
-            Width="78"
-            Height="31"
-            Margin="704,49,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            TextWrapping="Wrap" />
-        <Button
-            Width="62"
-            Height="31"
-            Margin="712,93,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Click="SupprimerMedicament"
-            Content="Supprimer" />
-        <Button
-            Width="62"
-            Height="31"
-            Margin="712,262,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Click="ViderMedicament"
-            Content="Truncate" />
-        <TextBox
-            x:Name="AddNomMaladie"
-            Width="126"
-            Height="31"
-            Margin="55,161,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            TextWrapping="Wrap" />
-        <Button
-            Width="62"
-            Height="31"
-            Margin="197,161,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Click="AjouterMaladie"
-            Content="Ajouter" />
+            <TabItem
+                Margin="60,3,-74,-8"
+                FontSize="20"
+                Header="Autorisation"
+                Style="{DynamicResource TabItemStyle}">
+                <Grid Margin="0,5,0,1">
+                    <Grid.Background>
+                        <ImageBrush
+                            ImageSource="/background.png"
+                            Stretch="UniformToFill"
+                            TileMode="FlipX" />
+                    </Grid.Background>
+                    <DataGrid
+                        x:Name="lvAutorisation"
+                        Margin="10,10,10,10"
+                        AutoGenerateColumns="False"
+                        ItemsSource="{Binding listeAutorisations, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding IdMedicament}" Header="ID Médicament" />
+                            <DataGridTextColumn Binding="{Binding NomMedicament}" Header="Nom Médicament" />
+                            <DataGridTextColumn Binding="{Binding IdMaladie}" Header="ID Maladie" />
+                            <DataGridTextColumn Binding="{Binding NomMaladie}" Header="Nom Maladie" />
+                            <DataGridTextColumn Binding="{Binding UneDate}" Header="Date" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Label
+            HorizontalContentAlignment="Left"
+            VerticalContentAlignment="Center"
+            Background="#FF93D361"
+            Content="Enregistrement Autorisations"
+            FlowDirection="LeftToRight"
+            FontSize="40"
+            FontWeight="Bold"
+            Foreground="White" />
 
 
     </Grid>

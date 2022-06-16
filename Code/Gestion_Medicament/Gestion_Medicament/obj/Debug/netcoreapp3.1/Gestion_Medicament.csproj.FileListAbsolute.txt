@@ -55,3 +55,4 @@ P:\SAÉ\SAE201\github\SAE201\Code\Gestion_Medicament\Gestion_Medicament\obj\Debu
 P:\SAE201\SAE201\Code\Gestion_Medicament\Gestion_Medicament\obj\Debug\netcoreapp3.1\GeneratedInternalTypeHelper.g.cs
 >>>>>>> f417c219c5596c9354f52bc4395ee972ce4bda4d
 P:\SAÉ\SAE201\github\SAE201\Code\Gestion_Medicament\Gestion_Medicament\obj\Debug\netcoreapp3.1\GeneratedInternalTypeHelper.g.cs
+P:\SAE201\SAE201\Code\Gestion_Medicament\Gestion_Medicament\bin\Debug\netcoreapp3.1\background.png
