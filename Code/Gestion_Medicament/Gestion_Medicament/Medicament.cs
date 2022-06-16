@@ -87,6 +87,7 @@ namespace Gestion_Medicament
 
                 }
             }
+            access.closeConnection();
         }
 
         public void Read()
@@ -94,10 +95,19 @@ namespace Gestion_Medicament
             throw new NotImplementedException();
         }
 
-        public void Update()
+        public void Update(int idmed, String nom)
         {
-            throw new NotImplementedException();
+            DataAccess access = new DataAccess();
+            if (access.openConnection())
+            {
+                if (access.setData($"UPDATE MEDICAMENT SET NOMMEDICAMENT = '{nom}' WHERE IDMEDICAMENT = {idmed}"))
+                {
+                    
+                }
+            }
+            access.closeConnection();
         }
+
 
         public void Delete(int id)
         {
@@ -108,7 +118,9 @@ namespace Gestion_Medicament
                 {
 
                 }
+           
             }
+            access.closeConnection();
         }
 
         public List<Medicament> FindAll()

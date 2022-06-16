@@ -7,7 +7,7 @@ namespace Gestion_Medicament
     {
         void Create();
         void Read();
-        void Update();
+        void Update(int id, String nom);
         void Delete(int id);
         List<T> FindAll();
         List<T> FindBySelection(ref String criteres);

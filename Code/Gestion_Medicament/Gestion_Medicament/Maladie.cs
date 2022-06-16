@@ -71,6 +71,7 @@ namespace Gestion_Medicament
 
                 }
             }
+            access.closeConnection();
         }
 
         public void Read()
@@ -78,7 +79,7 @@ namespace Gestion_Medicament
             throw new NotImplementedException();
         }
 
-        public void Update()
+        public void Update(int id, String nom)
         {
             throw new NotImplementedException();
         }
@@ -93,6 +94,7 @@ namespace Gestion_Medicament
 
                 }
             }
+            access.closeConnection();
         }
 
         public List<Maladie> FindAll()

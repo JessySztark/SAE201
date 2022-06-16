@@ -127,11 +127,12 @@ public class Est_autorisé : CRUD<Est_autorisé>
             DataAccess access = new DataAccess();
             if (access.openConnection())
             {
-                if (access.setData($"INSERT INTO EST_AUTORISE VALUES({this.IdMedicament},{this.IdMaladie},'{this.UneDate}');"))
+                if (access.setData($"INSERT INTO EST_AUTORISE VALUES({this.IdMedicament},{this.IdMaladie},'{this.UneDate}','{this.Commentaire}');"))
                 {
 
                 }
             }
+            access.closeConnection();
         }
 
     public void Read()
@@ -139,7 +140,7 @@ public class Est_autorisé : CRUD<Est_autorisé>
         throw new NotImplementedException();
     }
 
-    public void Update()
+    public void Update(int id, String nom)
     {
         throw new NotImplementedException();
     }
@@ -154,6 +155,7 @@ public class Est_autorisé : CRUD<Est_autorisé>
 
                 }
             }
+            access.closeConnection();
         }
 
     public List<Est_autorisé> FindAll()
@@ -165,7 +167,7 @@ public class Est_autorisé : CRUD<Est_autorisé>
         {
             if (access.openConnection())
             {
-                reader = access.getData("select a.IDMEDICAMENT, a.IDMALADIE, a.DATES, m.NOMMALADIE, med.NOMMEDICAMENT from [EST_AUTORISE] a JOIN [Maladie] m ON m.IDMALADIE = a.IDMALADIE JOIN [MEDICAMENT] med ON med.IDMEDICAMENT = a.IDMEDICAMENT");
+                reader = access.getData("select a.IDMEDICAMENT, a.IDMALADIE, a.DATES, m.NOMMALADIE, med.NOMMEDICAMENT, a.COMMENTAIRE from [EST_AUTORISE] a JOIN [Maladie] m ON m.IDMALADIE = a.IDMALADIE JOIN [MEDICAMENT] med ON med.IDMEDICAMENT = a.IDMEDICAMENT");
                 if (reader.HasRows)
                 {
                     while (reader.Read())
@@ -176,6 +178,7 @@ public class Est_autorisé : CRUD<Est_autorisé>
                         uneAutorisation.UneDate = reader.GetDateTime(2);
                         uneAutorisation.NomMaladie = reader.GetString(3);
                         uneAutorisation.NomMedicament = reader.GetString(4);
+                        uneAutorisation.Commentaire = reader.GetString(5);
                         listeAutorisations.Add(uneAutorisation);
                     }
                 }

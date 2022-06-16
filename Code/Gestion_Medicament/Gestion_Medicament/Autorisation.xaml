@@ -1,0 +1,19 @@
+﻿<Window
+    x:Class="Gestion_Medicament.Autorisation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Gestion_Medicament"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Autorisation"
+    Width="450"
+    Height="600"
+    mc:Ignorable="d">
+    <Window.Background>
+        <ImageBrush ImageSource="/background.png" Stretch="UniformToFill" />
+    </Window.Background>
+    <Grid>
+        <Label Content="Ajouter - Modifier - Supprimer" HorizontalAlignment="Center" VerticalAlignment="Top" Width="450" Height="62" Background="#FF384F26" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25" FontWeight="Bold"/>
+
+    </Grid>
+</Window>

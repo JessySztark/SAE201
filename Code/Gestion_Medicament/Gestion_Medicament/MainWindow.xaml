@@ -376,8 +376,14 @@
                         AutoGenerateColumns="False"
                         ItemsSource="{Binding listeMaladies, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding IdMaladie}" Header="ID" />
-                            <DataGridTextColumn Binding="{Binding NomMaladie}" Header="Nom" />
+                            <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding IdMaladie}"
+                                Header="ID" />
+                            <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding NomMaladie}"
+                                Header="Nom" />
                         </DataGrid.Columns>
                     </DataGrid>
                     <Label
@@ -417,8 +423,10 @@
                         Margin="65,105,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
+                        Click="AjouterMaladie"
                         Content="Ajouter" />
                     <TextBox
+                        x:Name="DelMaladieText"
                         Grid.Row="1"
                         Grid.Column="1"
                         Width="120"
@@ -441,6 +449,7 @@
                         Margin="67,96,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
+                        Click="DeleteMaladie"
                         Content="Supprimer" />
                     <Label
                         Grid.Column="2"
@@ -471,6 +480,7 @@
                         VerticalAlignment="Top"
                         Content="Modifier" />
                     <TextBox
+                        x:Name="UpdateNomMedText"
                         Grid.Column="2"
                         Width="120"
                         Margin="87,101,0,0"
@@ -493,7 +503,7 @@
                 FontSize="20"
                 Header="Médicament"
                 Style="{DynamicResource TabItemStyle}">
-                <Grid Margin="0,5,0,1">
+                <Grid Margin="0,5,0,1" DataContext="{Binding SelectedItem, ElementName=lvMedicament}">
                     <Grid.RowDefinitions>
                         <RowDefinition />
                         <RowDefinition Height="0.75*" />
@@ -517,8 +527,18 @@
                         ItemsSource="{Binding listeMedicaments, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
                         SelectionChanged="lvMedicament_SelectionChanged">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Idmedicament}" Header="ID" />
-                            <DataGridTextColumn Binding="{Binding NomMedicament}" Header="Nom" />
+                            <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding Idmedicament}"
+                                Header="ID" />
+                            <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding NomMedicament}"
+                                Header="Nom" />
+                            <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding IdCategorie}"
+                                Header="ID Catégorie" />
                         </DataGrid.Columns>
                     </DataGrid>
                     <Button
@@ -526,6 +546,7 @@
                         Margin="86,146,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
+                        Click="AjouterMedicament"
                         Content="Ajouter" />
                     <Label
                         Grid.Column="1"
@@ -554,7 +575,7 @@
                         Margin="86,143,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
-                        Content="Modiifer" />
+                        Content="Modifier" />
                     <Label
                         Grid.Column="2"
                         Width="63"
@@ -564,11 +585,13 @@
                         HorizontalContentAlignment="Right"
                         Content="ID :" />
                     <TextBox
+                        x:Name="UpdateMedText"
                         Grid.Column="2"
                         Width="120"
                         Margin="78,60,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
+                        Text="{Binding Idmedicament}"
                         TextWrapping="Wrap" />
                     <Label
                         Grid.Column="2"
@@ -585,11 +608,13 @@
                         HorizontalContentAlignment="Right"
                         Content="Nom :" />
                     <TextBox
+                        x:Name="UpdateNameMedText"
                         Grid.Column="2"
                         Width="120"
                         Margin="78,100,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
+                        Text="{Binding NomMedicament}"
                         TextWrapping="Wrap" />
                     <Button
                         Grid.Row="1"
@@ -597,6 +622,7 @@
                         Margin="86,99,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
+                        Click="SupprimerMedicament"
                         Content="Supprimer" />
                     <Label
                         Grid.Row="1"
@@ -614,6 +640,7 @@
                         Margin="78,60,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
+                        Text="{Binding Idmedicament}"
                         TextWrapping="Wrap" />
                     <Label
                         Grid.Row="1"
@@ -625,19 +652,46 @@
                         Foreground="#FF384F26" />
                     <Label
                         Grid.Column="1"
-                        Margin="11,96,0,0"
+                        Margin="12,96,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         HorizontalContentAlignment="Right"
-                        Content="Cat :" />
+                        Content="Catégorie :" />
                     <TextBox
                         x:Name="AddCatMed"
                         Grid.Column="1"
                         Width="120"
-                        Margin="78,100,0,0"
+                        Margin="129,100,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         TextWrapping="Wrap" />
+                    <StackPanel Grid.Column="1">
+                        <ComboBox x:Name="ComboCatMed">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding NomCategorie}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+                    <!--<ComboBox
+                        x:Name="ComboCatMed"
+                        Grid.Column="1"
+                        Margin="130,100,8,52"
+                        ItemsSource="{Binding Path=CategorieMedicament}"
+                        SelectedItem="{Binding Path=NomCategorie}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Path=IdCategorie}" />
+                                    <TextBlock Text=" - " />
+                                    <TextBlock Text="{Binding Path=NomCategorie}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>-->
                 </Grid>
             </TabItem>
             <TabItem
@@ -645,7 +699,7 @@
                 FontSize="20"
                 Header="Catégorie"
                 Style="{DynamicResource TabItemStyle}">
-                <Grid Margin="0,5,0,1">
+                <Grid Margin="0,5,0,1" DataContext="{Binding SelectedItem, ElementName=lvCategorie}">
                     <Grid.RowDefinitions>
                         <RowDefinition />
                         <RowDefinition Height="0.75*" />
@@ -665,8 +719,14 @@
                         AutoGenerateColumns="False"
                         ItemsSource="{Binding listeCategories, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding IdCategorie}" Header="ID" />
-                            <DataGridTextColumn Binding="{Binding NomCategorie}" Header="Nom" />
+                            <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding IdCategorie}"
+                                Header="ID" />
+                            <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding NomCategorie}"
+                                Header="Nom" />
                         </DataGrid.Columns>
                     </DataGrid>
                     <Label
@@ -720,6 +780,7 @@
                         Margin="84,59,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
+                        Text="{Binding IdCategorie}"
                         TextWrapping="Wrap" />
                     <Label
                         Grid.Row="1"
@@ -794,13 +855,38 @@
                         AutoGenerateColumns="False"
                         ItemsSource="{Binding listeAutorisations, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding IdMedicament}" Header="ID Médicament" />
-                            <DataGridTextColumn Binding="{Binding NomMedicament}" Header="Nom Médicament" />
-                            <DataGridTextColumn Binding="{Binding IdMaladie}" Header="ID Maladie" />
-                            <DataGridTextColumn Binding="{Binding NomMaladie}" Header="Nom Maladie" />
-                            <DataGridTextColumn Binding="{Binding UneDate}" Header="Date" />
+                            <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding NomMedicament}"
+                                Header="Nom Médicament" />
+                            <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding IdMedicament}"
+                                Header="ID Medicament" />
+                            <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding NomMaladie}"
+                                Header="Nom Maladie" />
+                            <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding IdMaladie}"
+                                Header="ID Maladie" />
+                            <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding UneDate}"
+                                Header="Date" />
+                            <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding Commentaire}"
+                                Header="Commentaire" />
                         </DataGrid.Columns>
                     </DataGrid>
+                    <Button
+                        Margin="0,0,24,25"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        Click="Gerer"
+                        Content="Gérer" />
                 </Grid>
             </TabItem>
         </TabControl>
