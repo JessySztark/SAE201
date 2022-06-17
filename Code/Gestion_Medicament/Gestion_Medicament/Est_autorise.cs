@@ -4,16 +4,30 @@ using System.Data.SqlClient;
 namespace Gestion_Medicament {
     public class Est_autorisé : CRUD<Est_autorisé> {
         private String commentaire;
-        private DateTime uneDate;
+        private Date_autorisation uneDate;
         private Maladie uneMaladie;
         private Medicament unMedicament;
         private int idMedicament;
         private int idMaladie;
         private String nomMaladie;
         private String nomMedicament;
+        private DateTime dateAuto;
 
         public Est_autorisé() {
 
+        }
+
+        public Est_autorisé( Medicament unMedicament, Maladie uneMaladie, Date_autorisation uneDate, String commentaire) {
+            this.UneMaladie = uneMaladie;
+            this.UnMedicament = unMedicament;
+            this.UneDate = uneDate;
+            this.Commentaire = commentaire;
+        }
+
+        public Est_autorisé(Medicament unMedicament, Maladie uneMaladie, Date_autorisation uneDate) {
+            this.UneMaladie = uneMaladie;
+            this.UnMedicament = unMedicament;
+            this.UneDate = uneDate;
         }
 
         public string Commentaire {
@@ -26,7 +40,7 @@ namespace Gestion_Medicament {
             }
         }
 
-        public DateTime UneDate {
+        public Date_autorisation UneDate {
             get {
                 return this.uneDate;
             }
@@ -95,13 +109,24 @@ namespace Gestion_Medicament {
                 this.nomMedicament = value;
             }
         }
+
+        public DateTime DateAuto {
+            get {
+                return this.dateAuto;
+            }
+
+            set {
+                this.dateAuto = value;
+            }
+        }
+
         /// <summary>
         /// Méthode permettant d'insérer une autorisation
         /// </summary>
         public void Create() {
             DataAccess access = new DataAccess();
             if (access.openConnection()) {
-                if (access.setData($"INSERT INTO EST_AUTORISE VALUES({this.IdMedicament},{this.IdMaladie},'{this.UneDate}','{this.Commentaire}');")) {
+                if (access.setData($"INSERT INTO EST_AUTORISE VALUES({this.IdMedicament},{this.IdMaladie},'{this.UneDate.Date.Year}-{this.UneDate.Date.Month}-{this.UneDate.Date.Day}','{this.Commentaire}');")) {
 
                 }
             }
@@ -142,7 +167,7 @@ namespace Gestion_Medicament {
                             Est_autorisé uneAutorisation = new Est_autorisé();
                             uneAutorisation.IdMedicament = (int)reader.GetDecimal(0);
                             uneAutorisation.IdMaladie = (int)reader.GetDecimal(1);
-                            uneAutorisation.UneDate = reader.GetDateTime(2);
+                            uneAutorisation.DateAuto = reader.GetDateTime(2);
                             uneAutorisation.NomMaladie = reader.GetString(3);
                             uneAutorisation.NomMedicament = reader.GetString(4);
                             uneAutorisation.Commentaire = reader.GetString(5);

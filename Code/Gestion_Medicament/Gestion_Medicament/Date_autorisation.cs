@@ -12,6 +12,10 @@ namespace Gestion_Medicament {
 
         }
 
+        public Date_autorisation(DateTime date) {
+            this.Date = date;
+        }
+
         private Est_autorisé[] est_autorisés;
         /// <summary>
         /// Propriété de type DateTime et de nom Date 

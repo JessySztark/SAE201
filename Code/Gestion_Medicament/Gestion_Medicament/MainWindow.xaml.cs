@@ -52,7 +52,6 @@ namespace Gestion_Medicament
                     MessageBox.Show("La catégorie doit être un nombre entier.", "Erreur !");
                 if(AddNomMedText.Text.Length == 0)
                     MessageBox.Show("Le nom du médicament n'est pas renseigné.", "Erreur !");
-
                 Medicament m = new Medicament(Int32.Parse(AddCatMedText.Text), AddNomMedText.Text);
                 m.Create();
                 ApplicationData.listeMedicaments.Add(m);
@@ -120,11 +119,11 @@ namespace Gestion_Medicament
                 else {
                     Medicament m = new Medicament();
                     m.Idmedicament = Int32.Parse(DelMedText.Text);
-
                     foreach (Medicament med in ApplicationData.listeMedicaments) {
                         if (m.Idmedicament == med.Idmedicament) {
                             ApplicationData.listeMedicaments.Remove(med);
                             m.Delete(med.Idmedicament);
+                            lvMedicament.Items.Refresh();
                             break;
                         }
                     }
@@ -132,10 +131,7 @@ namespace Gestion_Medicament
             }
             catch (Exception) {
                 MessageBox.Show("Le champs n'est pas renseigné, ou mal renseigné.", "Erreur !");
-            }
-
-            //ApplicationData.listeMedicaments.Remove(m);
-            lvMedicament.Items.Refresh();
+            }  
         }
 
         /// <summary>
@@ -316,31 +312,7 @@ namespace Gestion_Medicament
             lvCategorie.Items.Refresh();
         }
 
-        /// <summary>
-        /// Permet d'ajouter une autorisation
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-
-        // private void AjouterAutorisation(){}
-
-        /// <summary>
-        /// Permet de supprimer une autorisation 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-
-        private void SupprimerAutorisation(object sender, RoutedEventArgs e) {
-            Est_autorisé m = new Est_autorisé();
-            //m.IdMedicament = idmed.Text;
-            foreach (Est_autorisé med in ApplicationData.listeAutorisations) {
-                if (m.IdMedicament == med.IdMedicament) ;
-                {
-                    ApplicationData.listeAutorisations.Remove(med);
-                    m.Delete(med.IdMedicament);
-                    break;
-                }
-            }
+        private void lvAutorisation_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             lvAutorisation.Items.Refresh();
         }
     }

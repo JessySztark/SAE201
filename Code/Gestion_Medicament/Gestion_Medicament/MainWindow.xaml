@@ -852,7 +852,7 @@
                         x:Name="lvAutorisation"
                         Margin="10,10,10,10"
                         AutoGenerateColumns="False"
-                        ItemsSource="{Binding listeAutorisations, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
+                        ItemsSource="{Binding listeAutorisations, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}" SelectionChanged="lvAutorisation_SelectionChanged">
                         <DataGrid.Columns>
                             <DataGridTextColumn
                                 Width="*"
@@ -872,7 +872,7 @@
                                 Header="ID Maladie" />
                             <DataGridTextColumn
                                 Width="*"
-                                Binding="{Binding UneDate}"
+                                Binding="{Binding DateAuto}"
                                 Header="Date" />
                             <DataGridTextColumn
                                 Width="*"
