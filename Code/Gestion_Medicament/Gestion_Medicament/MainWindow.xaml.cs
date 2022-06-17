@@ -38,11 +38,11 @@ namespace Gestion_Medicament
         private void AjouterMedicament(object sender, RoutedEventArgs e)
         {
             try {
-                if(AddCatMed.Text is null)
+                if(AddCatMed.Text.Length == 0)
                     MessageBox.Show("La catégorie de médicament n'est pas renseignée.", "Erreur !");
-                if (!Saisie.SaisieInt(AddCatMed.Text))
+                else if (!Saisie.SaisieInt(AddCatMed.Text))
                     MessageBox.Show("La catégorie doit être un nombre entier.", "Erreur !");
-                if(AddNomMed.Text is null)
+                if(AddNomMed.Text.Length == 0)
                     MessageBox.Show("Le nom du médicament n'est pas renseigné.", "Erreur !");
 
                 Medicament m = new Medicament(Int32.Parse(AddCatMed.Text), AddNomMed.Text);
@@ -65,14 +65,16 @@ namespace Gestion_Medicament
                 if (!Saisie.SaisieInt(DelMedText.Text)) {
                     MessageBox.Show("L'ID du médicament doit être un nombre entier.", "Erreur !");
                 }
-                Medicament m = new Medicament();
-                m.Idmedicament = Int32.Parse(DelMedText.Text);
+                else {
+                    Medicament m = new Medicament();
+                    m.Idmedicament = Int32.Parse(DelMedText.Text);
 
-                foreach (Medicament med in ApplicationData.listeMedicaments) {
-                    if (m.Idmedicament == med.Idmedicament) {
-                        ApplicationData.listeMedicaments.Remove(med);
-                        m.Delete(med.Idmedicament);
-                        break;
+                    foreach (Medicament med in ApplicationData.listeMedicaments) {
+                        if (m.Idmedicament == med.Idmedicament) {
+                            ApplicationData.listeMedicaments.Remove(med);
+                            m.Delete(med.Idmedicament);
+                            break;
+                        }
                     }
                 }
             }
@@ -87,12 +89,12 @@ namespace Gestion_Medicament
         private void UpdateMedicament(object sender, RoutedEventArgs e)
         {
             try {
-                if (UpdateMedText.Text is null)
+                if (UpdateMedText.Text.Length == 0)
                     MessageBox.Show("L'ID du médicament doit être renseigné.", "Erreur !");
-                if (UpdateNameMedText.Text is null)
-                    MessageBox.Show("Le nom du médicament doit être renseigné.", "Erreur !");
-                if (!Saisie.SaisieInt(UpdateMedText.Text))
+                else if (!Saisie.SaisieInt(UpdateMedText.Text))
                     MessageBox.Show("L'ID du médicament doit être un nombre entier.", "Erreur !");
+                if (UpdateNameMedText.Text.Length == 0)
+                    MessageBox.Show("Le nom du médicament doit être renseigné.", "Erreur !");
                 Medicament m = new Medicament(Int32.Parse(UpdateMedText.Text), UpdateNameMedText.Text);
                 foreach (Medicament med in ApplicationData.listeMedicaments) {
                     if (m.Idmedicament == med.Idmedicament) {
@@ -118,12 +120,14 @@ namespace Gestion_Medicament
         private void AjouterMaladie(object sender, RoutedEventArgs e)
         {
             try {
-                if(AddNomMaladie.Text is null)
+                if (AddNomMaladie.Text.Length == 0)
                     MessageBox.Show("Le nom de la maladie n'est pas renseigné.", "Erreur !");
-                Maladie m = new Maladie(AddNomMaladie.Text);
-                m.Create();
-                ApplicationData.listeMaladies.Add(m);
-                lvMaladie.Items.Refresh();
+                else {
+                    Maladie m = new Maladie(AddNomMaladie.Text);
+                    m.Create();
+                    ApplicationData.listeMaladies.Add(m);
+                    lvMaladie.Items.Refresh();
+                }
             }
             catch (Exception) {
                 MessageBox.Show("Le champs n'est pas renseigné, ou mal renseigné.", "Erreur !");
@@ -132,14 +136,16 @@ namespace Gestion_Medicament
         private void DeleteMaladie(object sender, RoutedEventArgs e)
         {
             try {
-                if(!Saisie.SaisieInt(DelMaladieText.Text))
-                    MessageBox.Show("L'ID de la maladie doit être un nombre entier.", "Erreur !");
-                if(DelMaladieText.Text is null)
+                if (DelMaladieText.Text.Length == 0)
                     MessageBox.Show("L'ID de la maladie n'est pas renseigné.", "Erreur !");
-                Maladie m = new Maladie();
-                m.Delete(Int32.Parse(DelMaladieText.Text));
-                ApplicationData.listeMaladies.Remove(m);
-                lvMaladie.Items.Refresh();
+                else if (!Saisie.SaisieInt(DelMaladieText.Text))
+                    MessageBox.Show("L'ID de la maladie doit être un nombre entier.", "Erreur !");
+                else {
+                    Maladie m = new Maladie();
+                    m.Delete(Int32.Parse(DelMaladieText.Text));
+                    ApplicationData.listeMaladies.Remove(m);
+                    lvMaladie.Items.Refresh();
+                }
             }
             catch (Exception) {
                 MessageBox.Show("Le champs n'est pas renseigné, ou mal renseigné.", "Erreur !");

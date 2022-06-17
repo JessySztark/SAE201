@@ -676,22 +676,6 @@
                             </ComboBox.ItemTemplate>
                         </ComboBox>
                     </StackPanel>
-                    <!--<ComboBox
-                        x:Name="ComboCatMed"
-                        Grid.Column="1"
-                        Margin="130,100,8,52"
-                        ItemsSource="{Binding Path=CategorieMedicament}"
-                        SelectedItem="{Binding Path=NomCategorie}">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Path=IdCategorie}" />
-                                    <TextBlock Text=" - " />
-                                    <TextBlock Text="{Binding Path=NomCategorie}" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>-->
                 </Grid>
             </TabItem>
             <TabItem
