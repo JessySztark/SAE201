@@ -88,7 +88,9 @@ namespace Gestion_Medicament
                     MessageBox.Show("L'ID du médicament doit être un nombre entier.", "Erreur !");
                 if (UpdateNameMedText.Text.Length == 0)
                     MessageBox.Show("Le nom du médicament doit être renseigné.", "Erreur !");
-                Medicament m = new Medicament(Int32.Parse(UpdateIDMedText.Text), UpdateNameMedText.Text);
+                Medicament m = new Medicament();
+                m.Idmedicament = Int32.Parse(UpdateIDMedText.Text);
+                m.NomMedicament = UpdateNameMedText.Text;
                 foreach (Medicament med in ApplicationData.listeMedicaments) {
                     if (m.Idmedicament == med.Idmedicament) {
                         med.Update(Int32.Parse(UpdateIDMedText.Text), UpdateNameMedText.Text);
@@ -180,10 +182,12 @@ namespace Gestion_Medicament
                     MessageBox.Show("L'ID de la maladie doit être un nombre entier.", "Erreur !");
                 if (UpdateNomMaladieText.Text.Length == 0)
                     MessageBox.Show("Le nom de la maladie doit être renseigné.", "Erreur !");
-                Maladie m = new Maladie(AddNomMaladie.Text);
+                Maladie m = new Maladie();
+                m.IdMaladie = Int32.Parse(UpdateIDMaladieText.Text);
+                m.NomMaladie = UpdateNomMaladieText.Text;
                 foreach (Maladie mal in ApplicationData.listeMaladies) {
                     if (m.IdMaladie == mal.IdMaladie) {
-                        m.Update(Int32.Parse(UpdateIDMaladieText.Text), UpdateNomMaladieText.Text);
+                        mal.Update(Int32.Parse(UpdateIDMaladieText.Text), UpdateNomMaladieText.Text);
                         break;
                     }
                 }
@@ -261,10 +265,12 @@ namespace Gestion_Medicament
                     MessageBox.Show("L'ID de la catégorie doit être un nombre entier.", "Erreur !");
                 if (UpdateNameCatText.Text.Length == 0)
                     MessageBox.Show("Le nom de la catégorie doit être renseigné.", "Erreur !");
-                CategorieMedicament c = new CategorieMedicament(UpdateNameCatText.Text);
+                CategorieMedicament c = new CategorieMedicament();
+                c.IdCategorie = Int32.Parse(UpdateIDCatText.Text);
+                c.NomCategorie = UpdateNameCatText.Text;
                 foreach (CategorieMedicament cm in ApplicationData.listeCategories) {
                     if (c.IdCategorie == cm.IdCategorie) {
-                        c.Update(Int32.Parse(UpdateIDCatText.Text), UpdateNameCatText.Text);
+                        cm.Update(Int32.Parse(UpdateIDCatText.Text), UpdateNameCatText.Text);
                         break;
                     }
                 }
