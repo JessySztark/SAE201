@@ -38,14 +38,14 @@ namespace Gestion_Medicament
         private void AjouterMedicament(object sender, RoutedEventArgs e)
         {
             try {
-                if(AddCatMed.Text.Length == 0)
+                if(AddCatMedText.Text.Length == 0)
                     MessageBox.Show("La catégorie de médicament n'est pas renseignée.", "Erreur !");
-                else if (!Saisie.SaisieInt(AddCatMed.Text))
+                else if (!Saisie.SaisieInt(AddCatMedText.Text))
                     MessageBox.Show("La catégorie doit être un nombre entier.", "Erreur !");
-                if(AddNomMed.Text.Length == 0)
+                if(AddNomMedText.Text.Length == 0)
                     MessageBox.Show("Le nom du médicament n'est pas renseigné.", "Erreur !");
 
-                Medicament m = new Medicament(Int32.Parse(AddCatMed.Text), AddNomMed.Text);
+                Medicament m = new Medicament(Int32.Parse(AddCatMedText.Text), AddNomMedText.Text);
                 m.Create();
                 ApplicationData.listeMedicaments.Add(m);
                 lvMedicament.Items.Refresh();
@@ -89,16 +89,16 @@ namespace Gestion_Medicament
         private void UpdateMedicament(object sender, RoutedEventArgs e)
         {
             try {
-                if (UpdateMedText.Text.Length == 0)
+                if (UpdateIDMedText.Text.Length == 0)
                     MessageBox.Show("L'ID du médicament doit être renseigné.", "Erreur !");
-                else if (!Saisie.SaisieInt(UpdateMedText.Text))
+                else if (!Saisie.SaisieInt(UpdateIDMedText.Text))
                     MessageBox.Show("L'ID du médicament doit être un nombre entier.", "Erreur !");
                 if (UpdateNameMedText.Text.Length == 0)
                     MessageBox.Show("Le nom du médicament doit être renseigné.", "Erreur !");
-                Medicament m = new Medicament(Int32.Parse(UpdateMedText.Text), UpdateNameMedText.Text);
+                Medicament m = new Medicament(Int32.Parse(UpdateIDMedText.Text), UpdateNameMedText.Text);
                 foreach (Medicament med in ApplicationData.listeMedicaments) {
                     if (m.Idmedicament == med.Idmedicament) {
-                        m.Update(Int32.Parse(UpdateMedText.Text), UpdateNameMedText.Text);
+                        m.Update(Int32.Parse(UpdateIDMedText.Text), UpdateNameMedText.Text);
                         MessageBox.Show($"{m.NomMedicament}");
                         break;
                     }

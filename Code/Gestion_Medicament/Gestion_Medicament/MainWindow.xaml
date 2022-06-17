@@ -459,6 +459,7 @@
                         Content="Modification : "
                         Foreground="#FF384F26" />
                     <TextBox
+                        x:Name="UpdateIDMaladieText"
                         Grid.Column="2"
                         Width="120"
                         Margin="87,59,0,0"
@@ -480,7 +481,7 @@
                         VerticalAlignment="Top"
                         Content="Modifier" />
                     <TextBox
-                        x:Name="UpdateNomMedText"
+                        x:Name="UpdateNomMaladieText"
                         Grid.Column="2"
                         Width="120"
                         Margin="87,101,0,0"
@@ -556,7 +557,7 @@
                         HorizontalContentAlignment="Right"
                         Content="Nom :" />
                     <TextBox
-                        x:Name="AddNomMed"
+                        x:Name="AddNomMedText"
                         Grid.Column="1"
                         Width="120"
                         Margin="78,60,0,0"
@@ -585,7 +586,7 @@
                         HorizontalContentAlignment="Right"
                         Content="ID :" />
                     <TextBox
-                        x:Name="UpdateMedText"
+                        x:Name="UpdateIDMedText"
                         Grid.Column="2"
                         Width="120"
                         Margin="78,60,0,0"
@@ -658,7 +659,7 @@
                         HorizontalContentAlignment="Right"
                         Content="Catégorie :" />
                     <TextBox
-                        x:Name="AddCatMed"
+                        x:Name="AddCatMedText"
                         Grid.Column="1"
                         Width="120"
                         Margin="129,100,0,0"
@@ -736,6 +737,7 @@
                         VerticalAlignment="Top"
                         Content="Ajouter" />
                     <TextBox
+                        x:Name="AddCatText"
                         Grid.Column="1"
                         Width="120"
                         Margin="82,59,0,0"
@@ -758,6 +760,7 @@
                         VerticalAlignment="Top"
                         Content="Supprimer" />
                     <TextBox
+                        x:Name="DelCatText"
                         Grid.Row="1"
                         Grid.Column="1"
                         Width="120"
@@ -805,6 +808,7 @@
                         VerticalAlignment="Top"
                         Content="Modifier" />
                     <TextBox
+                        x:Name="UpdateIDCatText"
                         Grid.Column="2"
                         Width="120"
                         Margin="87,59,0,0"
@@ -812,6 +816,7 @@
                         VerticalAlignment="Top"
                         TextWrapping="Wrap" />
                     <TextBox
+                        x:Name="UpdateNameCatText"
                         Grid.Column="2"
                         Width="120"
                         Margin="87,101,0,0"
