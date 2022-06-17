@@ -356,7 +356,7 @@
                 FontSize="20"
                 Header="Maladie"
                 Style="{DynamicResource TabItemStyle}">
-                <Grid Margin="0,5,0,1">
+                <Grid Margin="0,5,0,1" DataContext="{Binding SelectedItem, ElementName=lvMaladie}">
                     <Grid.RowDefinitions>
                         <RowDefinition />
                         <RowDefinition Height="0.75*" />
@@ -433,6 +433,7 @@
                         Margin="84,59,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
+                        Text="{Binding IdMaladie}"
                         TextWrapping="Wrap" />
                     <Label
                         Grid.Row="1"
@@ -465,6 +466,7 @@
                         Margin="87,59,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
+                        Text="{Binding IdMaladie}"
                         TextWrapping="Wrap" />
                     <Label
                         Grid.Column="2"
@@ -488,6 +490,7 @@
                         Margin="87,101,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
+                        Text="{Binding NomMaladie}"
                         TextWrapping="Wrap" />
                     <Label
                         Grid.Column="2"
@@ -819,6 +822,7 @@
                         Margin="87,59,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
+                        Text="{Binding IdCategorie}"
                         TextWrapping="Wrap" />
                     <TextBox
                         x:Name="UpdateNameCatText"
@@ -827,6 +831,7 @@
                         Margin="87,101,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
+                        Text="{Binding NomCategorie}"
                         TextWrapping="Wrap" />
                 </Grid>
             </TabItem>
