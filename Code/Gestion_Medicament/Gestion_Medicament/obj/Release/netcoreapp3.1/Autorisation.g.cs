@@ -53,7 +53,7 @@ namespace Gestion_Medicament {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Gestion_Medicament;V1.0.0.0;component/autorisation.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Gestion_Medicament;component/autorisation.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\Autorisation.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
