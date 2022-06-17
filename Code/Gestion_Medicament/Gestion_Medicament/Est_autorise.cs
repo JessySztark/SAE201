@@ -150,7 +150,7 @@ public class Est_autorisé : CRUD<Est_autorisé>
             DataAccess access = new DataAccess();
             if (access.openConnection())
             {
-                if (access.setData($"DELETE FROM AUTORISATION WHERE idmedicament = {id}"))
+                if (access.setData($"DELETE FROM EST_AUTORISE WHERE idmedicament = {id}"))
                 {
 
                 }
