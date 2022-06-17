@@ -22,10 +22,12 @@ namespace Gestion_Medicament
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// Initialisation des composant de la page xaml
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
-            // ComboCatMed.ItemsSource = typeof(CategorieMedicament).GetProperties();
             ApplicationData.loadApplicationData();
             lvMaladie.ItemsSource = ApplicationData.listeMaladies;
             lvCategorie.ItemsSource = ApplicationData.listeCategories;
@@ -34,6 +36,12 @@ namespace Gestion_Medicament
             lvAutorisation.ItemsSource = ApplicationData.listeAutorisations;
             this.DataContext = this;
         }
+
+        /// <summary>
+        /// Méthode permettant d'ajouter un médicament
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void AjouterMedicament(object sender, RoutedEventArgs e)
         {
@@ -54,11 +62,21 @@ namespace Gestion_Medicament
                 MessageBox.Show("Un ou plusieurs champs ne sont pas renseignés, ou mal renseignés.", "Erreur !");
             }
         }
+        /// <summary>
+        /// Méthode permettant de rafraichir l'affichage des données de médicament lorsque l'on clique sur autre chose 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void lvMedicament_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             lvMedicament.Items.Refresh();
         }
+        /// <summary>
+        /// Méthode permettant de supprimer un médicament de la base de données
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void SupprimerMedicament(object sender, RoutedEventArgs e) {
             try {
@@ -86,6 +104,12 @@ namespace Gestion_Medicament
             lvMedicament.Items.Refresh();
         }
 
+        /// <summary>
+        /// Méthode permettant de modifier un médicament
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
         private void UpdateMedicament(object sender, RoutedEventArgs e)
         {
             try {
@@ -111,11 +135,23 @@ namespace Gestion_Medicament
             lvMedicament.Items.Refresh();
         }
 
+        /// <summary>
+        /// Méthode permettant de remettre les Médicaments a vide
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
         private void ViderMedicament(object sender, RoutedEventArgs e) {
             Medicament m = new Medicament();
             m.Trunc();
             lvMedicament.Items.Refresh();
         }
+
+        /// <summary>
+        /// Méthode permettant d'ajouter une maladie à la base de données
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void AjouterMaladie(object sender, RoutedEventArgs e)
         {
@@ -133,6 +169,13 @@ namespace Gestion_Medicament
                 MessageBox.Show("Le champs n'est pas renseigné, ou mal renseigné.", "Erreur !");
             }
         }
+
+        /// <summary>
+        /// Méthode permettant de supprimer une maladie de la base de données
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
         private void DeleteMaladie(object sender, RoutedEventArgs e)
         {
             try {
@@ -152,9 +195,65 @@ namespace Gestion_Medicament
             }
         }
 
+        /// <summary>
+        /// Méthode permettant d'afficher la page pour gerer les autorisations
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
         private void Gerer(object sender, RoutedEventArgs e) {
             Autorisation autorisation = new Autorisation();
             autorisation.ShowDialog();
+        }
+
+        /// <summary>
+        /// Méthode permettant de supprimer une catégorie de médicament
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SupprimerCatMedicament(object sender, RoutedEventArgs e) {
+            CategorieMedicament m = new CategorieMedicament();
+            m.IdCategorie = Int32.Parse(DelMedText.Text);
+
+            foreach (CategorieMedicament med in ApplicationData.listeCategories) {
+                if (m.IdCategorie == med.IdCategorie) {
+                    ApplicationData.listeCategories.Remove(med);
+                    m.Delete(med.IdCategorie);
+                    break;
+                }
+            }
+
+            //ApplicationData.listeMedicaments.Remove(m);
+            lvCategorie.Items.Refresh();
+        }
+        /// <summary>
+        /// Permet de supprimer une autorisation 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SupprimerAutorisation(object sender, RoutedEventArgs e) {
+            Est_autorisé m = new Est_autorisé();
+            //m.IdMedicament = idmed.Text;
+            foreach (Est_autorisé med in ApplicationData.listeAutorisations) {
+                if (m.IdMedicament == med.IdMedicament) ;
+                {
+                    ApplicationData.listeAutorisations.Remove(med);
+                    m.Delete(med.IdMedicament);
+                    break;
+                }
+            }
+            lvAutorisation.Items.Refresh();
+        }
+        /// <summary>
+        /// Permet d'ajouter une autorisation
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AjouterAutorisation(object sender, RoutedEventArgs e) {
+            /*Est_autorisé m = new Est_autorisé(idmed.Text, idmal.Text, date.Text, com.Text);
+            m.Create();
+            ApplicationData.listeAutorisations.Add(m);
+            lvMaladie.Items.Refresh();*/
         }
     }
 }

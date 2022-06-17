@@ -2,115 +2,111 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 
-namespace Gestion_Medicament
-{
-    public class CategorieMedicament : CRUD<CategorieMedicament>
-    {
+namespace Gestion_Medicament {
+    public class CategorieMedicament : CRUD<CategorieMedicament> {
         private String nomCategorie;
         private int idCategorie;
-        public CategorieMedicament()
-        {
+        /// <summary>
+        /// Constructeur créer dans le squelette du code de base
+        /// </summary>
+        public CategorieMedicament() {
 
         }
-        public string NomCategorie
-        {
-            get
-            {
+        public string NomCategorie {
+            get {
                 return this.nomCategorie;
             }
 
-            set
-            {
+            set {
                 this.nomCategorie = value;
             }
         }
 
-        public int IdCategorie
-        {
-            get
-            {
+        public int IdCategorie {
+            get {
                 return this.idCategorie;
             }
 
-            set
-            {
+            set {
                 this.idCategorie = value;
             }
         }
-
-        public void Create()
-        {
+        /// <summary>
+        /// Méthode ajoutant une catégorie à la base de données 
+        /// </summary>
+        public void Create() {
             DataAccess access = new DataAccess();
-            if (access.openConnection())
-            {
-                if (access.setData($"INSERT INTO CATEGORIEMEDICAMENT VALUES({this.IdCategorie},'{this.NomCategorie}');"))
-                {
+            if (access.openConnection()) {
+                if (access.setData($"INSERT INTO CATEGORIEMEDICAMENT VALUES({this.IdCategorie},'{this.NomCategorie}');")) {
 
                 }
             }
             access.closeConnection();
         }
-
-        public void Read()
-        {
+        /// <summary>
+        /// Méthode obligée par héritage du CRUD
+        /// </summary>
+        public void Read() {
             throw new NotImplementedException();
         }
-
-        public void Update(int id, String nom)
-        {
+        /// <summary>
+        /// Méthode obligée par héritage du CRUD
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="nom"></param>
+        public void Update(int id, String nom) {
             throw new NotImplementedException();
         }
-
-        public void Delete(int id)
-        {
+        /// <summary>
+        /// Méthode supprimant la catégorie séléctionnée
+        /// </summary>
+        /// <param name="id"></param>
+        public void Delete(int id) {
             DataAccess access = new DataAccess();
-            if (access.openConnection())
-            {
-                if (access.setData($"DELETE FROM CATEGORIEMEDICAMENT WHERE idcategorie = {id}"))
-                {
+            if (access.openConnection()) {
+                if (access.setData($"DELETE FROM CATEGORIEMEDICAMENT WHERE idcategorie = {id}")) {
 
                 }
             }
             access.closeConnection();
         }
-
-        public List<CategorieMedicament> FindAll()
-        {
+        /// <summary>
+        /// Méthode créant une liste de catégorie de médicament pour les afficher par la suite 
+        /// </summary>
+        /// <returns></returns>
+        public List<CategorieMedicament> FindAll() {
             List<CategorieMedicament> listeCategories = new List<CategorieMedicament>();
             DataAccess access = new DataAccess();
             SqlDataReader reader;
-            try
-            {
-                if (access.openConnection())
-                {
+            try {
+                if (access.openConnection()) {
                     reader = access.getData("select * from [CATEGORIEMEDICAMENT]");
-                    if (reader.HasRows)
-                    {
-                        while (reader.Read())
-                        {
+                    if (reader.HasRows) {
+                        while (reader.Read()) {
                             CategorieMedicament uneCategorie = new CategorieMedicament();
                             uneCategorie.IdCategorie = (int)reader.GetDecimal(0);
                             uneCategorie.NomCategorie = reader.GetString(1);
                             listeCategories.Add(uneCategorie);
                         }
                     }
-                    else
-                    {
+                    else {
                         System.Windows.MessageBox.Show("No rows found.", "Important Message");
                     }
                     reader.Close();
                     access.closeConnection();
                 }
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 System.Windows.MessageBox.Show(ex.Message, "Important Message");
             }
             return listeCategories;
         }
-
-        public List<CategorieMedicament> FindBySelection(ref string criteres)
-        {
+        /// <summary>
+        /// Méthode obligée par héritage du CRUD
+        /// </summary>
+        /// <param name="criteres"></param>
+        /// <returns></returns>
+        public List<CategorieMedicament> FindBySelection(ref string criteres) {
             throw new NotImplementedException();
         }
     }
