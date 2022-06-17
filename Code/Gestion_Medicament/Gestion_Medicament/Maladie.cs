@@ -81,7 +81,13 @@ namespace Gestion_Medicament
 
         public void Update(int id, String nom)
         {
-            throw new NotImplementedException();
+            DataAccess access = new DataAccess();
+            if (access.openConnection()) {
+                if (access.setData($"UPDATE MALADIE SET NOMMALADIE = '{nom}' WHERE IDMALADIE = {id}")) {
+
+                }
+            }
+            access.closeConnection();
         }
 
         public void Delete(int id)
@@ -89,7 +95,7 @@ namespace Gestion_Medicament
             DataAccess access = new DataAccess();
             if (access.openConnection())
             {
-                if (access.setData($"DELETE FROM MALADIE WHERE idmaladie = {id}"))
+                if (access.setData($"DELETE FROM MALADIE WHERE IDMALADIE = {id}"))
                 {
 
                 }

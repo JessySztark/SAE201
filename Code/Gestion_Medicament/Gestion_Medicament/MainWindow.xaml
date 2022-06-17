@@ -449,7 +449,7 @@
                         Margin="67,96,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
-                        Click="DeleteMaladie"
+                        Click="SupprimerMaladie"
                         Content="Supprimer" />
                     <Label
                         Grid.Column="2"
@@ -479,6 +479,7 @@
                         Margin="70,142,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
+                        Click="UpdateMaladie"
                         Content="Modifier" />
                     <TextBox
                         x:Name="UpdateNomMaladieText"
@@ -576,6 +577,7 @@
                         Margin="86,143,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
+                        Click="UpdateMedicament"
                         Content="Modifier" />
                     <Label
                         Grid.Column="2"
@@ -735,6 +737,7 @@
                         Margin="65,105,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
+                        Click="AjouterCategorie"
                         Content="Ajouter" />
                     <TextBox
                         x:Name="AddCatText"
@@ -758,6 +761,7 @@
                         Margin="67,96,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
+                        Click="SupprimerCategorie"
                         Content="Supprimer" />
                     <TextBox
                         x:Name="DelCatText"
@@ -806,6 +810,7 @@
                         Margin="70,142,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
+                        Click="UpdateCategorie"
                         Content="Modifier" />
                     <TextBox
                         x:Name="UpdateIDCatText"

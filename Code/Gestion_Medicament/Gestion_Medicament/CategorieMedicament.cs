@@ -12,6 +12,10 @@ namespace Gestion_Medicament {
         public CategorieMedicament() {
 
         }
+        public CategorieMedicament(string nomcategorie) {
+            this.NomCategorie = nomcategorie;
+        }
+
         public string NomCategorie {
             get {
                 return this.nomCategorie;
@@ -34,10 +38,11 @@ namespace Gestion_Medicament {
         /// <summary>
         /// Méthode ajoutant une catégorie à la base de données 
         /// </summary>
+
         public void Create() {
             DataAccess access = new DataAccess();
             if (access.openConnection()) {
-                if (access.setData($"INSERT INTO CATEGORIEMEDICAMENT VALUES({this.IdCategorie},'{this.NomCategorie}');")) {
+                if (access.setData($"INSERT INTO CATEGORIEMEDICAMENT VALUES('{this.NomCategorie}');")) {
 
                 }
             }
@@ -55,7 +60,13 @@ namespace Gestion_Medicament {
         /// <param name="id"></param>
         /// <param name="nom"></param>
         public void Update(int id, String nom) {
-            throw new NotImplementedException();
+            DataAccess access = new DataAccess();
+            if (access.openConnection()) {
+                if (access.setData($"UPDATE CATEGORIEMEDICAMENT SET NOMCATEGORIE = '{nom}' WHERE IDCATEGORIE = {id}")) {
+
+                }
+            }
+            access.closeConnection();
         }
         /// <summary>
         /// Méthode supprimant la catégorie séléctionnée
