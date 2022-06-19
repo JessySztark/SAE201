@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-P:\SAE201\SAE201\Code\Gestion_Medicament\Gestion_Medicament\obj\Debug\netcoreapp3.1\
+C:\Users\Jessy\Desktop\SAE201\SAE201\Code\Gestion_Medicament\Gestion_Medicament\obj\Debug\netcoreapp3.1\
 Gestion_Medicament
 none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1;
-P:\SAE201\SAE201\Code\Gestion_Medicament\Gestion_Medicament\App.xaml
-24243283
+C:\Users\Jessy\Desktop\SAE201\SAE201\Code\Gestion_Medicament\Gestion_Medicament\App.xaml
+31525928571
 
-14-1177009070
-194478699446
-Autorisation.xaml;MainWindow.xaml;
+151240145415
+1941618591611
+AutorisationAjouter.xaml;AutorisationModifier.xaml;MainWindow.xaml;
 
-True
+False
 

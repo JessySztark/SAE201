@@ -24,8 +24,11 @@ namespace Gestion_Medicament {
             this.NomMedicament = nommedicament;
         }
 
-        private CategorieMedicament[] categorieMedicaments;
-        private Est_autorisé[] est_autorisés;
+        public Medicament(int idmedicament, int idcategorie, String nommedicament) {
+            this.Idmedicament = idmedicament;
+            this.IdCategorie = idcategorie;
+            this.NomMedicament = nommedicament;
+        }
 
         public int Idmedicament {
             get {
@@ -111,6 +114,20 @@ namespace Gestion_Medicament {
             }
             access.closeConnection();
         }
+
+        /// <summary>
+        /// Méthode permettant de réinitialiser les médicaments de la table
+        /// </summary>
+        public void Truncate() {
+            DataAccess access = new DataAccess();
+            if (access.openConnection()) {
+                if (access.setData($"TRUNCATE TABLE MEDICAMENT")) {
+
+                }
+            }
+            access.closeConnection();
+        }
+
         /// <summary>
         /// Méthode créant la liste de médicaments directement depuis la base de données
         /// </summary>
@@ -146,17 +163,6 @@ namespace Gestion_Medicament {
 
         public List<Medicament> FindBySelection(ref string criteres) {
             throw new NotImplementedException();
-        }
-        /// <summary>
-        /// Méthode permettant de réinitialiser les médicaments de la table
-        /// </summary>
-        public void Trunc() {
-            DataAccess access = new DataAccess();
-            if (access.openConnection()) {
-                if (access.setData($"TRUNCATE TABLE MEDICAMENT")) {
-
-                }
-            }
         }
     }
 }

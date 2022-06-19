@@ -16,7 +16,6 @@ namespace Gestion_Medicament {
             this.Date = date;
         }
 
-        private Est_autorisé[] est_autorisés;
         /// <summary>
         /// Propriété de type DateTime et de nom Date 
         /// </summary>
@@ -68,6 +67,17 @@ namespace Gestion_Medicament {
 
             }
         }
+
+        public void Truncate() {
+            DataAccess access = new DataAccess();
+            if (access.openConnection()) {
+                if (access.setData($"TRUNCATE TABLE DATE_AUTORISATION")) {
+
+                }
+            }
+            access.closeConnection();
+        }
+
         /// <summary>
         /// Méthode créant une liste pour l'affichage des autorisations 
         /// </summary>

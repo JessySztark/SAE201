@@ -20,7 +20,10 @@ namespace Gestion_Medicament
             this.NomMaladie = nomMaladie;
         }
 
-        private Est_autorisé[] est_autorisés;
+        public Maladie(int idmaladie, String nomMaladie) {
+            this.IdMaladie = idmaladie;
+            this.NomMaladie = nomMaladie;
+        }
 
         public string NomMaladie
         {
@@ -97,6 +100,16 @@ namespace Gestion_Medicament
             {
                 if (access.setData($"DELETE FROM MALADIE WHERE IDMALADIE = {id}"))
                 {
+
+                }
+            }
+            access.closeConnection();
+        }
+
+        public void Truncate() {
+            DataAccess access = new DataAccess();
+            if (access.openConnection()) {
+                if (access.setData($"TRUNCATE TABLE MALADIE")) {
 
                 }
             }

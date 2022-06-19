@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "P:\\SAE201\\SAE201\\Code\\Gestion_Medicament\\Gestion_Medicament\\Gestion_Medicament.csproj": {}
+    "C:\\Users\\Jessy\\Desktop\\SAE201\\SAE201\\Code\\Gestion_Medicament\\Gestion_Medicament\\Gestion_Medicament.csproj": {}
   },
   "projects": {
-    "P:\\SAE201\\SAE201\\Code\\Gestion_Medicament\\Gestion_Medicament\\Gestion_Medicament.csproj": {
+    "C:\\Users\\Jessy\\Desktop\\SAE201\\SAE201\\Code\\Gestion_Medicament\\Gestion_Medicament\\Gestion_Medicament.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "P:\\SAE201\\SAE201\\Code\\Gestion_Medicament\\Gestion_Medicament\\Gestion_Medicament.csproj",
+        "projectUniqueName": "C:\\Users\\Jessy\\Desktop\\SAE201\\SAE201\\Code\\Gestion_Medicament\\Gestion_Medicament\\Gestion_Medicament.csproj",
         "projectName": "Gestion_Medicament",
-        "projectPath": "P:\\SAE201\\SAE201\\Code\\Gestion_Medicament\\Gestion_Medicament\\Gestion_Medicament.csproj",
-        "packagesPath": "C:\\Users\\sztarkj\\.nuget\\packages\\",
-        "outputPath": "P:\\SAE201\\SAE201\\Code\\Gestion_Medicament\\Gestion_Medicament\\obj\\",
+        "projectPath": "C:\\Users\\Jessy\\Desktop\\SAE201\\SAE201\\Code\\Gestion_Medicament\\Gestion_Medicament\\Gestion_Medicament.csproj",
+        "packagesPath": "C:\\Users\\Jessy\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Jessy\\Desktop\\SAE201\\SAE201\\Code\\Gestion_Medicament\\Gestion_Medicament\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\sztarkj\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Jessy\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -59,6 +55,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[3.1.13, 3.1.13]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
@@ -67,7 +69,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
         }
       }
     }

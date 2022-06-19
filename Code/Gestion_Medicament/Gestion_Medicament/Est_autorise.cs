@@ -17,12 +17,27 @@ namespace Gestion_Medicament {
 
         }
 
+        /// <summary>
+        /// Constructeur permettant d'initialiser une autorisation grâce à une maladie, un médicament, une date et un commentaire
+        /// </summary>
+        /// <param name="unMedicament">Variable de type Médicament</param>
+        /// <param name="uneMaladie">Variable de type Maladie</param>
+        /// <param name="uneDate">Variable de type Date_autorisation </param>
+        /// <param name="commentaire">Variable de type String</param>
+
         public Est_autorisé( Medicament unMedicament, Maladie uneMaladie, Date_autorisation uneDate, String commentaire) {
             this.UneMaladie = uneMaladie;
             this.UnMedicament = unMedicament;
             this.UneDate = uneDate;
             this.Commentaire = commentaire;
         }
+
+        /// <summary>
+        /// Constructeur permettant d'initialiser une autorisation grâce à une maladie, un médicament et une date sans commentaire
+        /// </summary>
+        /// <param name="unMedicament">Variable de type Médicament</param>
+        /// <param name="uneMaladie">Variable de type Maladie </param>
+        /// <param name="uneDate">Variable de type String</param>
 
         public Est_autorisé(Medicament unMedicament, Maladie uneMaladie, Date_autorisation uneDate) {
             this.UneMaladie = uneMaladie;
@@ -123,6 +138,7 @@ namespace Gestion_Medicament {
         /// <summary>
         /// Méthode permettant d'insérer une autorisation
         /// </summary>
+
         public void Create() {
             DataAccess access = new DataAccess();
             if (access.openConnection()) {
@@ -133,17 +149,29 @@ namespace Gestion_Medicament {
             access.closeConnection();
         }
 
+        /// <summary>
+        /// Méthode non définie dans cette classe
+        /// </summary>
+
         public void Read() {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Méthode non définie dans cette classe pour le moment
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="nom"></param>
+
         public void Update(int id, String nom) {
             throw new NotImplementedException();
         }
+
         /// <summary>
-        /// Méthode permettant de supprimer une autorisation
+        /// Méthode permettant de supprimer une autorisation de la base de données
         /// </summary>
         /// <param name="id"></param>
+
         public void Delete(int id) {
             DataAccess access = new DataAccess();
             if (access.openConnection()) {
@@ -154,6 +182,21 @@ namespace Gestion_Medicament {
             }
             access.closeConnection();
         }
+
+        public void Truncate() {
+            DataAccess access = new DataAccess();
+            if (access.openConnection()) {
+                if (access.setData($"TRUNCATE TABLE EST_AUTORISE")) {
+
+                }
+            }
+            access.closeConnection();
+        }
+
+        /// <summary>
+        /// Méthode permettant de créer une liste d'autorisation qui sera affichée dans 
+        /// </summary>
+        /// <returns>Retourne une liste d'autorisation</returns>
 
         public List<Est_autorisé> FindAll() {
             List<Est_autorisé> listeAutorisations = new List<Est_autorisé>();
@@ -187,8 +230,24 @@ namespace Gestion_Medicament {
             return listeAutorisations;
         }
 
+        /// <summary>
+        /// Méthode permettant de retrouver une autorisation dans la liste grâce à un critère
+        /// </summary>
+        /// <param name="criteres">Variable de type String</param>
+        /// <returns></returns>
+
         public List<Est_autorisé> FindBySelection(ref string criteres) {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Méthode permettant de montrer ce que retourne la classe quand on l'affiche 
+        /// </summary>
+        /// <returns></returns>
+
+        public override string ToString() {
+            String txt = $"Autorisation pour {this.NomMedicament} agissant contre {this.NomMaladie}.\n Date d'autorisation : {this.DateAuto} \nCommentaire : {this.Commentaire}";
+            return txt;
         }
     }
 }

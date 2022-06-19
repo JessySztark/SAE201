@@ -15,25 +15,30 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UtilitairesConsole;
 
-namespace Gestion_Medicament
-{
+namespace Gestion_Medicament {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
-    {
+    public partial class MainWindow : Window {
+        private int lastIndexMedicament;
+        private int lastIndexMaladie;
+        private int lastIndexCategorie;
+
         /// <summary>
         /// Initialisation des composant de la page xaml
         /// </summary>
-        public MainWindow()
-        {
+        public MainWindow() {
             InitializeComponent();
             ApplicationData.loadApplicationData();
             lvMaladie.ItemsSource = ApplicationData.listeMaladies;
             lvCategorie.ItemsSource = ApplicationData.listeCategories;
             lvMedicament.ItemsSource = ApplicationData.listeMedicaments;
+            cbCategorie.ItemsSource = ApplicationData.listeCategories;
             //lvDate.ItemsSource = ApplicationData.listeDates;
             lvAutorisation.ItemsSource = ApplicationData.listeAutorisations;
+            lastIndexMedicament = FindLastMedInList(ApplicationData.listeMedicaments);
+            lastIndexCategorie = FindLastCatInList(ApplicationData.listeCategories);
+            lastIndexMaladie = FindLastMalInList(ApplicationData.listeMaladies);
             this.DataContext = this;
         }
 
@@ -43,16 +48,14 @@ namespace Gestion_Medicament
         /// <param name="sender"></param>
         /// <param name="e"></param>
 
-        private void AjouterMedicament(object sender, RoutedEventArgs e)
-        {
+        private void AjouterMedicament(object sender, RoutedEventArgs e) {
             try {
-                if(AddCatMedText.Text.Length == 0)
+                if (cbCategorie.SelectedItem is null)
                     MessageBox.Show("La catégorie de médicament n'est pas renseignée.", "Erreur !");
-                else if (!Saisie.SaisieInt(AddCatMedText.Text))
-                    MessageBox.Show("La catégorie doit être un nombre entier.", "Erreur !");
-                if(AddNomMedText.Text.Length == 0)
+                if (AddNomMedText.Text.Length == 0)
                     MessageBox.Show("Le nom du médicament n'est pas renseigné.", "Erreur !");
-                Medicament m = new Medicament(Int32.Parse(AddCatMedText.Text), AddNomMedText.Text);
+                lastIndexMedicament++;
+                Medicament m = new Medicament(lastIndexMedicament, ((CategorieMedicament)cbCategorie.SelectedItem).IdCategorie, AddNomMedText.Text);
                 m.Create();
                 ApplicationData.listeMedicaments.Add(m);
                 lvMedicament.Items.Refresh();
@@ -67,8 +70,7 @@ namespace Gestion_Medicament
         /// <param name="sender"></param>
         /// <param name="e"></param>
 
-        private void lvMedicament_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+        private void lvMedicament_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             lvMedicament.Items.Refresh();
         }
 
@@ -78,8 +80,7 @@ namespace Gestion_Medicament
         /// <param name="sender"></param>
         /// <param name="e"></param>
 
-        private void UpdateMedicament(object sender, RoutedEventArgs e)
-        {
+        private void UpdateMedicament(object sender, RoutedEventArgs e) {
             try {
                 if (UpdateIDMedText.Text.Length == 0)
                     MessageBox.Show("L'ID du médicament doit être renseigné.", "Erreur !");
@@ -100,7 +101,7 @@ namespace Gestion_Medicament
             catch (Exception) {
                 MessageBox.Show("Un ou plusieurs champs ne sont pas renseignés, ou mal renseignés.", "Erreur !");
             }
-            
+
             lvMedicament.Items.Refresh();
         }
 
@@ -121,8 +122,11 @@ namespace Gestion_Medicament
                     m.Idmedicament = Int32.Parse(DelMedText.Text);
                     foreach (Medicament med in ApplicationData.listeMedicaments) {
                         if (m.Idmedicament == med.Idmedicament) {
-                            ApplicationData.listeMedicaments.Remove(med);
-                            m.Delete(med.Idmedicament);
+                            MessageBoxResult result = MessageBox.Show($"{med.NomMedicament}", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+                            if (result == MessageBoxResult.OK) {
+                                ApplicationData.listeMedicaments.Remove(med);
+                                m.Delete(med.Idmedicament);
+                            }
                             lvMedicament.Items.Refresh();
                             break;
                         }
@@ -131,7 +135,7 @@ namespace Gestion_Medicament
             }
             catch (Exception) {
                 MessageBox.Show("Le champs n'est pas renseigné, ou mal renseigné.", "Erreur !");
-            }  
+            }
         }
 
         /// <summary>
@@ -142,7 +146,7 @@ namespace Gestion_Medicament
 
         /*private void ViderMedicament(object sender, RoutedEventArgs e) {
             Medicament m = new Medicament();
-            m.Trunc();
+            m.Truncate();
             lvMedicament.Items.Refresh();
         }*/
 
@@ -152,13 +156,13 @@ namespace Gestion_Medicament
         /// <param name="sender"></param>
         /// <param name="e"></param>
 
-        private void AjouterMaladie(object sender, RoutedEventArgs e)
-        {
+        private void AjouterMaladie(object sender, RoutedEventArgs e) {
             try {
                 if (AddNomMaladie.Text.Length == 0)
                     MessageBox.Show("Le nom de la maladie n'est pas renseigné.", "Erreur !");
                 else {
-                    Maladie m = new Maladie(AddNomMaladie.Text);
+                    lastIndexMaladie++;
+                    Maladie m = new Maladie(lastIndexMaladie,AddNomMaladie.Text);
                     m.Create();
                     ApplicationData.listeMaladies.Add(m);
                     lvMaladie.Items.Refresh();
@@ -213,8 +217,11 @@ namespace Gestion_Medicament
                     m.IdMaladie = Int32.Parse(DelMaladieText.Text);
                     foreach (Maladie mal in ApplicationData.listeMaladies) {
                         if (m.IdMaladie == mal.IdMaladie) {
-                            ApplicationData.listeMaladies.Remove(mal);
-                            m.Delete(Int32.Parse(DelMaladieText.Text));
+                            MessageBoxResult result = MessageBox.Show($"{mal.NomMaladie}", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+                            if (result == MessageBoxResult.OK) {
+                                ApplicationData.listeMaladies.Remove(mal);
+                                m.Delete(Int32.Parse(DelMaladieText.Text));
+                            }
                             lvMaladie.Items.Refresh();
                             break;
                         }
@@ -226,23 +233,13 @@ namespace Gestion_Medicament
             }
         }
 
-        /// <summary>
-        /// Méthode permettant d'afficher la page pour gerer les autorisations
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-
-        private void Gerer(object sender, RoutedEventArgs e) {
-            Autorisation autorisation = new Autorisation();
-            autorisation.ShowDialog();
-        }
-
         private void AjouterCategorie(object sender, RoutedEventArgs e) {
             try {
                 if (AddCatText.Text.Length == 0)
                     MessageBox.Show("Le nom de la catégorie n'est pas renseigné.", "Erreur !");
                 else {
-                    CategorieMedicament c = new CategorieMedicament(AddCatText.Text);
+                    lastIndexCategorie++;
+                    CategorieMedicament c = new CategorieMedicament(lastIndexCategorie,AddCatText.Text);
                     c.Create();
                     ApplicationData.listeCategories.Add(c);
                     lvCategorie.Items.Refresh();
@@ -285,7 +282,7 @@ namespace Gestion_Medicament
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void SupprimerCategorie(object sender, RoutedEventArgs e) {
-            
+
 
             try {
                 if (DelCatText.Text.Length == 0)
@@ -297,8 +294,11 @@ namespace Gestion_Medicament
                     c.IdCategorie = Int32.Parse(DelCatText.Text);
                     foreach (CategorieMedicament cm in ApplicationData.listeCategories) {
                         if (c.IdCategorie == cm.IdCategorie) {
-                            ApplicationData.listeCategories.Remove(cm);
-                            c.Delete(cm.IdCategorie);
+                            MessageBoxResult result = MessageBox.Show($"{cm}", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+                            if (result == MessageBoxResult.OK) {
+                                ApplicationData.listeCategories.Remove(cm);
+                                c.Delete(cm.IdCategorie);
+                            }
                             break;
                         }
                     }
@@ -314,6 +314,75 @@ namespace Gestion_Medicament
 
         private void lvAutorisation_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             lvAutorisation.Items.Refresh();
+        }
+
+        /// <summary>
+        /// Méthode permettant d'afficher la page pour gerer les autorisations
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
+        private void AjouterAutorisation(object sender, RoutedEventArgs e) {
+            AutorisationAjouter autorisation = new AutorisationAjouter();
+            autorisation.ShowDialog();
+        }
+
+        private void ModifierAutorisation(object sender, RoutedEventArgs e) {
+            AutorisationModifier autorisationModifier = new AutorisationModifier();
+            autorisationModifier.Show();
+        }
+
+        private void SupprimerAutorisation(object sender, RoutedEventArgs e) {
+            try {
+                if (lvAutorisation.SelectedItem is null)
+                    MessageBox.Show("La suppression est impossible ! Vérifiez de bien selectionner un champs avant de supprimer", "Erreur !");
+                else {
+                    MessageBoxResult result = MessageBox.Show($"{lvAutorisation.SelectedItem.ToString()}\n Étes-vous sûr de vouloir supprimer ?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+                    if (result == MessageBoxResult.OK) {
+                        Est_autorisé est_Autorise = new Est_autorisé();
+                        est_Autorise.IdMedicament = ((Est_autorisé)lvAutorisation.SelectedItem).IdMedicament;
+                        est_Autorise.IdMaladie = ((Est_autorisé)lvAutorisation.SelectedItem).IdMaladie;
+                        est_Autorise.UneDate = ((Est_autorisé)lvAutorisation.SelectedItem).UneDate;
+                        foreach (Est_autorisé ea in ApplicationData.listeAutorisations) {
+                            if (est_Autorise.IdMaladie == ea.IdMaladie && est_Autorise.IdMedicament == ea.IdMedicament && est_Autorise.UneDate == ea.UneDate) {
+                                ApplicationData.listeAutorisations.Remove(ea);
+                                est_Autorise.Delete(ea.IdMedicament);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception) {
+
+                MessageBox.Show("Le champs n'est pas renseigné, ou mal renseigné.", "Erreur !");
+            }
+            lvAutorisation.Items.Refresh();
+        }
+
+        private int FindLastMedInList(List<Medicament> list) {
+            int Upper = 0;
+            foreach(Medicament m in list) {
+                if (m.Idmedicament >= Upper)
+                    Upper = m.Idmedicament;
+            }
+            return Upper;
+        }
+        private int FindLastCatInList(List<CategorieMedicament> list) {
+            int Upper = 0;
+            foreach (CategorieMedicament c in list) {
+                if (c.IdCategorie >= Upper)
+                    Upper = c.IdCategorie;
+            }
+            return Upper;
+        }
+        private int FindLastMalInList(List<Maladie> list) {
+            int Upper = 0;
+            foreach (Maladie m in list) {
+                if (m.IdMaladie >= Upper)
+                    Upper = m.IdMaladie;
+            }
+            return Upper;
         }
     }
 }

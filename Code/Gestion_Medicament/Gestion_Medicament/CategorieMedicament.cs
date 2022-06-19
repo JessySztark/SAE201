@@ -12,7 +12,12 @@ namespace Gestion_Medicament {
         public CategorieMedicament() {
 
         }
-        public CategorieMedicament(string nomcategorie) {
+        public CategorieMedicament(String nomcategorie) {
+            this.NomCategorie = nomcategorie;
+        }
+
+        public CategorieMedicament(int idcategorie, String nomcategorie) {
+            this.IdCategorie = idcategorie;
             this.NomCategorie = nomcategorie;
         }
 
@@ -81,6 +86,17 @@ namespace Gestion_Medicament {
             }
             access.closeConnection();
         }
+
+        public void Truncate() {
+            DataAccess access = new DataAccess();
+            if (access.openConnection()) {
+                if (access.setData($"TRUNCATE TABLE CATEGORIEMEDICAMENT")) {
+
+                }
+            }
+            access.closeConnection();
+        }
+
         /// <summary>
         /// Méthode créant une liste de catégorie de médicament pour les afficher par la suite 
         /// </summary>
