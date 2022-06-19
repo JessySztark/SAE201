@@ -38,20 +38,25 @@ namespace Gestion_Medicament {
                     String dayCompose = AddDateText.SelectedDate.ToString().Substring(0, 2);
                     String monthCompose = AddDateText.SelectedDate.ToString().Substring(3, 2);
                     String yearCompose = AddDateText.SelectedDate.ToString().Substring(6, 4);
-                    DateTime dt = new DateTime(Int32.Parse(yearCompose), Int32.Parse(monthCompose), Int32.Parse(dayCompose));
-                    Date_autorisation d = new Date_autorisation((DateTime)AddDateText.SelectedDate);
+                    String hourCompose = $"{ DateTime.Now.Hour - 12:d2}";
+                    String minuteCompose = $"{ DateTime.Now.Minute:d2}";
+                    String secondCompose = $"{ DateTime.Now.Second:d2}";
+                    DateTime dt = new DateTime(Int32.Parse(yearCompose), Int32.Parse(monthCompose), Int32.Parse(dayCompose), Int32.Parse(hourCompose), Int32.Parse(minuteCompose), Int32.Parse(secondCompose));
+                    Date_autorisation d = new Date_autorisation(dt);
                     d.Create();
                     ApplicationData.listeDates.Add(d);
                     Medicament m = new Medicament();
                     Est_autorisé autoris = new Est_autorisé((Medicament)cbMedicament.SelectedItem,(Maladie)cbMaladie.SelectedItem, d);
                     autoris.IdMedicament = autoris.UnMedicament.Idmedicament;
+                    autoris.NomMedicament = autoris.UnMedicament.NomMedicament;
                     autoris.IdMaladie = autoris.UneMaladie.IdMaladie;
+                    autoris.NomMaladie = autoris.UneMaladie.NomMaladie;
                     autoris.DateAuto = autoris.UneDate.Date;
                     if (!(AddCommentaireText.Text.Length == 0))
                         autoris.Commentaire = AddCommentaireText.Text;
                     autoris.Create();
                     ApplicationData.listeAutorisations.Add(autoris);
-                    MessageBox.Show("L'autorisation à été ajouté", "Autorisation ajoutée", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("L'autorisation a été ajoutée", "Autorisation ajoutée", MessageBoxButton.OK, MessageBoxImage.Information);
                     Close();
                 }
             }

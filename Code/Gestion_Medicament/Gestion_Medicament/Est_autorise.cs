@@ -142,7 +142,7 @@ namespace Gestion_Medicament {
         public void Create() {
             DataAccess access = new DataAccess();
             if (access.openConnection()) {
-                if (access.setData($"INSERT INTO EST_AUTORISE VALUES({this.IdMedicament},{this.IdMaladie},'{this.UneDate.Date.Year}-{this.UneDate.Date.Month}-{this.UneDate.Date.Day}','{this.Commentaire}');")) {
+                if (access.setData($"INSERT INTO EST_AUTORISE VALUES({this.IdMedicament},{this.IdMaladie},'{this.DateAuto}','{this.Commentaire}');")) {
 
                 }
             }

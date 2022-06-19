@@ -352,6 +352,7 @@ namespace Gestion_Medicament {
                         }
                     }
                 }
+                lvAutorisation.Items.Refresh();
             }
             catch (Exception) {
 
